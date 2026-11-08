@@ -10,5 +10,5 @@
    between tabs of the same browser, handy for a look but not for the house.
    --------------------------------------------------------------------------- */
 window.SYNC_CONFIG = {
-  databaseURL: ''
+  databaseURL: 'https://shrimply-d4518-default-rtdb.europe-west1.firebasedatabase.app/'
 };
