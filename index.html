@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shrimply</title>
+<meta name="description" content="One shopping list for the whole house. A Bouncy Production · Made for Haz.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#ffd23f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Shrimply">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{
+  --ink:#2b1b3d; --cream:#fff7e8; --paper:#ffffff; --sun:#ffd23f; --coral:#ff7a59; --peach:#ffe0d6; --green:#7ed957; --sky:#6ec1ff;
+  --muted:#5b4a6b; --faint:#7a6a88; --dash:#f1dcc0; --warn:#b42318; --stripe1:#ffe9a8; --stripe2:#fff3cf;
+  --head:'Fredoka','Nunito',system-ui,sans-serif; --body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --sb:env(safe-area-inset-bottom,0px); --st:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-weight:700;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh;min-height:100dvh}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+.hide{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#app{max-width:520px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;background:var(--cream)}
+@media (min-width:560px){body{background:#ffeec8}#app{border-left:3px solid var(--ink);border-right:3px solid var(--ink)}}
+.view{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.credit{margin:0;font-size:12px;font-weight:700;color:var(--muted);text-align:center}
+.btn{min-height:52px;border:3px solid var(--ink);border-radius:18px;background:var(--paper);color:var(--ink);font-family:var(--head);font-size:19px;font-weight:600;padding:0 18px;box-shadow:0 4px 0 var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.coral{background:var(--coral)} .btn.green{background:var(--green)} .btn.sky{background:var(--sky)} .btn.sun{background:var(--sun)}
+.btn.big{min-height:58px;font-size:21px}
+.btn.small{min-height:44px;font-family:var(--body);font-size:15px;font-weight:800;border-radius:14px;padding:0 14px;box-shadow:0 3px 0 var(--ink)}
+.btn.sure{background:#ffd6cf;color:var(--warn)}
+.iconbtn{width:48px;height:48px;border-radius:14px;border:3px solid var(--ink);background:var(--paper);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 3px 0 var(--ink);flex-shrink:0;padding:0}
+.iconbtn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.field{height:52px;border-radius:16px;border:3px solid var(--ink);background:var(--paper);font-size:18px;font-weight:700;padding:0 14px;width:100%;min-width:0}
+.field:focus,.btn:focus-visible,.iconbtn:focus-visible,.chip:focus-visible,.tick:focus-visible,.nm:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.bubble{background:var(--paper);border:2.5px solid var(--ink);border-radius:16px 16px 16px 4px;padding:8px 12px;font-size:14px;font-weight:700;line-height:1.35}
+.shrimp{display:block;flex-shrink:0}
+.shrimp.wig{animation:wig .5s ease}
+@keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}60%{transform:rotate(8deg)}}
+
+/* welcome + join */
+.hero{position:relative;flex-grow:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:calc(36px + var(--st)) 24px 0;overflow:hidden}
+.blob{top:-150px;left:50%;width:600px;height:540px;margin-left:-300px;border-radius:0 0 50% 50%;background:var(--sun);z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero>.blob,.hero>.dot{position:absolute}
+.dot{position:absolute;border-radius:50%;border:3px solid var(--ink);z-index:1}
+.hero h1{margin:0;font-family:var(--head);font-size:46px;font-weight:700;letter-spacing:.5px}
+.hero p.tag{margin:0;font-size:17px;line-height:1.45;max-width:310px}
+.hero .bubble{margin-top:12px;max-width:310px;border-width:3px;border-radius:18px;padding:12px 16px;font-size:15px;box-shadow:4px 4px 0 var(--ink)}
+.acts{display:flex;flex-direction:column;gap:12px;padding:18px 24px 0}
+.foot{padding:16px 24px calc(16px + var(--sb))}
+.err{margin:0;min-height:20px;color:var(--warn);font-size:14px;font-weight:800;text-align:center}
+.codein{height:64px;text-align:center;font-family:var(--head);font-size:34px;font-weight:700;letter-spacing:10px;text-transform:uppercase;padding:0 0 0 10px}
+
+/* list */
+.top{background:var(--sun);border-bottom:3px solid var(--ink);padding:calc(14px + var(--st)) 16px 12px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5}
+.top h1{margin:0;font-family:var(--head);font-size:28px;font-weight:700;line-height:1.1}
+.top .tt{flex-grow:1;min-width:0}
+.pill{margin:3px 0 0;font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px}
+.pill i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);display:inline-block;flex-shrink:0}
+.pill.on i{background:#2fbf71} .pill.wait i{background:#fff;border-style:dashed} .pill.off i{background:var(--coral);border-radius:2px} .pill.no i{background:var(--warn);border-radius:2px} .pill.demo i{background:var(--sky)}
+.say{padding:12px 16px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.banner{margin:12px 16px 0;border-radius:16px;padding:10px 14px;font-size:14px;font-weight:700;border:2.5px solid var(--ink);background:repeating-linear-gradient(135deg,var(--stripe1) 0 10px,var(--stripe2) 10px 20px)}
+.banner.bad{background:repeating-linear-gradient(135deg,#ffd6cf 0 10px,#ffe9e4 10px 20px)}
+.items{flex-grow:1;padding:0 16px 150px}
+.sec{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:15px;border:2.5px solid var(--ink);margin:14px 0 2px;font-family:var(--head);font-size:15px;font-weight:600}
+.row{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;min-height:50px;border-bottom:2px dashed var(--dash)}
+.row.flash{animation:flash 1.2s ease}
+@keyframes flash{0%,60%{background:#fff3cf}100%{background:transparent}}
+.tick{width:44px;height:48px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center}
+.tick b{width:30px;height:30px;border-radius:50%;border:3px solid var(--ink);background:var(--paper);display:flex;align-items:center;justify-content:center}
+.tick.on b{background:var(--green)}
+.tick.pop b{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.nm{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;min-height:48px;border:none;background:none;text-align:left;padding:6px 0;font-size:18px;font-weight:800}
+.nm span{overflow-wrap:anywhere}
+.nm em{font-style:normal;font-size:14px;font-weight:700;color:var(--muted);max-width:150px;text-align:right;overflow-wrap:anywhere}
+.row.got .nm span{color:var(--faint);text-decoration:line-through;text-decoration-thickness:2px}
+.trolhead{margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.trolhead .sec{margin:0;background:var(--paper)}
+.trolhead .gap{flex-grow:1}
+.empty{margin:28px 0 0;text-align:center;font-size:15px;color:var(--muted)}
+.addbar{position:fixed;left:0;right:0;bottom:0;z-index:6;pointer-events:none}
+.addbar>div{max-width:520px;margin:0 auto;background:var(--paper);border-top:3px solid var(--ink);padding:12px 16px calc(10px + var(--sb));pointer-events:auto}
+@media (min-width:560px){.addbar>div{border-left:3px solid var(--ink);border-right:3px solid var(--ink)}}
+.addrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+.addrow .field{background:var(--cream)}
+.addbar .credit{margin-top:10px}
+.toast{position:absolute;left:16px;right:16px;bottom:calc(100% + 10px);background:var(--ink);color:#fff;border-radius:16px;padding:8px 8px 8px 14px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:52px;pointer-events:auto}
+.toast span{flex-grow:1}
+.toast b{color:#8fd0ff}
+.toast button{min-height:40px;padding:0 12px;border-radius:12px;border:none;background:var(--sun);color:var(--ink);font-size:14px;font-weight:800}
+
+/* usuals */
+.top.coral{background:var(--coral);flex-wrap:wrap}
+.usearch{padding:0 16px 12px;background:var(--coral);border-bottom:3px solid var(--ink)}
+.uhint{margin:12px 16px 0;font-size:14px;color:var(--muted)}
+.ulist{flex-grow:1;padding:0 16px 24px}
+.wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{min-height:44px;padding:0 14px;border-radius:22px;border:2.5px solid var(--ink);background:var(--paper);font-size:16px;font-weight:800;display:inline-flex;align-items:center;gap:6px;max-width:100%;text-align:left}
+.chip[aria-pressed="true"]{box-shadow:0 3px 0 var(--ink)}
+.chip .x{width:20px;height:20px;border-radius:50%;background:#ffd6cf;color:var(--warn);display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1}
+.ufoot{position:sticky;bottom:0;background:var(--paper);border-top:3px solid var(--ink);padding:12px 16px calc(10px + var(--sb));display:flex;flex-direction:column;gap:10px}
+.ufoot .say2{display:flex;align-items:center;gap:10px}
+.ufoot .say2 .bubble{flex-grow:1;background:var(--peach)}
+
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet .back{position:absolute;inset:0;background:rgba(43,27,61,.5);border:none;padding:0}
+.panel{position:relative;width:100%;max-width:520px;max-height:92vh;max-height:92dvh;overflow:auto;background:var(--paper);border:3px solid var(--ink);border-bottom:none;border-radius:26px 26px 0 0;padding:12px 20px calc(16px + var(--sb));display:flex;flex-direction:column;gap:14px;animation:up .2s ease}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+.grab{width:48px;height:6px;border-radius:3px;background:var(--ink);align-self:center}
+.ph{display:flex;align-items:center;gap:10px}
+.ph h2{margin:0;flex-grow:1;font-family:var(--head);font-size:26px;font-weight:600}
+.lb{font-size:14px;font-weight:800;display:block;margin-bottom:6px}
+.panel .field{background:var(--cream)}
+.achips{display:flex;flex-wrap:wrap;gap:8px}
+.achips .chip{font-size:15px;padding:0 14px 0 10px}
+.achips .chip i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink);display:inline-block}
+.note{margin:0;font-size:13px;color:var(--muted)}
+.two{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px}
+.btn.rm{font-family:var(--body);font-size:16px;font-weight:800;color:var(--warn);box-shadow:none}
+.qr{align-self:center;background:#fff;border:3px solid var(--ink);border-radius:20px;padding:10px;box-shadow:5px 5px 0 var(--coral);width:196px;height:196px}
+.qr svg{display:block;width:100%;height:100%}
+.code{display:flex;gap:8px;justify-content:center}
+.code span{width:44px;height:58px;border-radius:12px;border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:30px;font-weight:700}
+.warnbox{background:var(--stripe2);border:2.5px solid var(--ink);border-radius:16px;padding:10px 14px;font-size:14px;display:flex;gap:10px}
+.link{border:none;background:none;color:var(--warn);font-size:15px;font-weight:800;text-decoration:underline;min-height:48px;align-self:center;padding:0 12px}
+.linkout{font-size:13px;word-break:break-all;color:var(--muted);text-align:center;margin:0}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* narrow phones go last so base rules don't win */
+@media (max-width:370px){
+  .top h1{font-size:24px}
+  .code span{width:38px;height:52px;font-size:26px}
+  .hero h1{font-size:40px}
+  .nm em{max-width:110px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <section id="vWelcome" class="view hide" aria-labelledby="wT">
+    <div class="hero">
+      <div class="blob" aria-hidden="true"></div>
+      <span class="dot" aria-hidden="true" style="top:64px;right:26px;width:22px;height:22px;background:var(--sky)"></span>
+      <span class="dot" aria-hidden="true" style="top:250px;left:26px;width:14px;height:14px;background:#ff8fa3"></span>
+      <span class="dot" aria-hidden="true" style="top:36px;left:60px;width:10px;height:10px;background:var(--green)"></span>
+      <button type="button" class="shrimpbtn" data-wig aria-label="The Shrimp" style="border:none;background:none;padding:0"><span data-shrimp="170"></span></button>
+      <h1 id="wT">Shrimply</h1>
+      <p class="tag">One shopping list for the whole house. Add it on your phone, it pops up on theirs.</p>
+      <div class="bubble" id="wSay">“Small shrimp, big memory. I’ll never forget the milk.” <span style="color:#c2410c;font-weight:800">The Shrimp</span></div>
+    </div>
+    <div class="acts">
+      <button type="button" class="btn coral big" id="bStart">Start our list</button>
+      <button type="button" class="btn sky big" id="bJoin">Join with a code</button>
+      <p class="note" style="text-align:center;font-weight:700">Got a QR from someone? Scan it with your camera instead.</p>
+    </div>
+    <div class="foot"><p class="credit">A Bouncy Production · Made for Haz</p></div>
+  </section>
+
+  <section id="vJoin" class="view hide" aria-labelledby="jT">
+    <div class="top">
+      <button type="button" class="iconbtn" id="jBack" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="tt"><h1 id="jT">Join a list</h1></div>
+    </div>
+    <div class="acts" style="padding-top:24px">
+      <div style="display:flex;align-items:center;gap:10px"><span data-shrimp="64"></span><div class="bubble" style="flex-grow:1">Ask whoever started the list to tap <b>Share</b>. The code is six letters and numbers.</div></div>
+      <label class="lb" for="jCode" style="margin:10px 0 0">List code</label>
+      <input id="jCode" class="field codein" maxlength="6" autocomplete="off" autocapitalize="characters" spellcheck="false" inputmode="text" placeholder="······">
+      <p class="err" id="jErr" role="status" aria-live="polite"></p>
+      <p class="note hide" id="jSwap" style="text-align:center">This swaps the list on this phone for the new one.</p>
+      <button type="button" class="btn green big" id="jGo">Join</button>
+    </div>
+    <div class="foot" style="margin-top:auto"><p class="credit">A Bouncy Production · Made for Haz</p></div>
+  </section>
+
+  <section id="vList" class="view hide" aria-labelledby="lT">
+    <header class="top">
+      <button type="button" data-wig aria-label="The Shrimp" style="border:none;background:none;padding:0"><span data-shrimp="54"></span></button>
+      <div class="tt"><h1 id="lT">Shrimply</h1><p class="pill" id="pill" role="status" aria-live="polite"><i></i><span></span></p></div>
+      <button type="button" class="iconbtn" id="bShare" aria-label="Share this list"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg></button>
+    </header>
+    <div class="banner bad hide" id="noStore">This browser won’t let Shrimply save, so anything added offline vanishes when you close it.</div>
+    <div class="banner hide" id="offBan">Your changes are safe on this phone. They’ll swim over to everyone when you’re back online.</div>
+    <div class="banner bad hide" id="denyBan">Firebase isn’t letting this list through. Check the database rules have been published (see the README).</div>
+    <div class="say">
+      <div class="bubble" id="say" aria-live="polite"></div>
+      <button type="button" class="btn coral small" id="bUsuals" style="font-family:var(--head);font-size:16px;font-weight:600;min-height:48px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>Usuals</button>
+    </div>
+    <div class="items" id="items"></div>
+    <div class="addbar"><div style="position:relative">
+      <div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB" class="hide">Change</button></div>
+      <form class="addrow" id="addF" autocomplete="off">
+        <label for="addI" class="sr">Add an item</label>
+        <input id="addI" class="field" placeholder="Add something…" maxlength="70" enterkeyhint="done">
+        <button type="submit" class="btn green" style="min-height:52px;box-shadow:0 3px 0 var(--ink)">Add</button>
+      </form>
+      <p class="credit">A Bouncy Production · Made for Haz</p>
+    </div></div>
+  </section>
+
+  <section id="vUsuals" class="view hide" aria-labelledby="uT">
+    <header class="top coral">
+      <button type="button" class="iconbtn" id="uBack" aria-label="Back to the list"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="tt"><h1 id="uT">The usuals</h1></div>
+      <button type="button" class="btn small" id="uTidy" aria-pressed="false">Tidy up</button>
+    </header>
+    <div class="usearch"><label for="uFind" class="sr">Find a usual</label><input id="uFind" class="field" placeholder="Find one… e.g. bin bags" autocomplete="off" style="height:48px;font-size:16px"></div>
+    <p class="uhint" id="uHint">Everything the house has bought, most-bought first. Tap to pop it on the list, tap again to take it off.</p>
+    <div class="ulist" id="ulist"></div>
+    <div class="ufoot">
+      <div class="say2"><span data-shrimp="48"></span><div class="bubble" id="uSay"></div></div>
+      <button type="button" class="btn green big" id="uDone">Done</button>
+      <p class="credit">A Bouncy Production · Made for Haz</p>
+    </div>
+  </section>
+
+  <div class="sheet hide" id="sheet"><button type="button" class="back" id="sheetBack" aria-label="Close" tabindex="-1"></button><div class="panel" id="panel" role="dialog" aria-modal="true"></div></div>
+</div>
+<script src="sync-config.js"></script>
+<script src="shrimp-messages.js"></script>
+<script>
+/* qrcode-generator 1.4.4 — (c) 2009 Kazuhiko Arase, MIT licence — http://www.d-project.com/ */
+var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],f={},c=function(t,r){o=function(t){for(var r=new Array(t),e=0;e<t;e+=1){r[e]=new Array(t);for(var n=0;n<t;n+=1)r[e][n]=null}return r}(i=4*e+17),l(0,0),l(i-7,0),l(0,i-7),s(),h(),d(t,r),e>=7&&v(t),null==a&&(a=p(e,n,u)),w(a,r)},l=function(t,r){for(var e=-1;e<=7;e+=1)if(!(t+e<=-1||i<=t+e))for(var n=-1;n<=7;n+=1)r+n<=-1||i<=r+n||(o[t+e][r+n]=0<=e&&e<=6&&(0==n||6==n)||0<=n&&n<=6&&(0==e||6==e)||2<=e&&e<=4&&2<=n&&n<=4)},h=function(){for(var t=8;t<i-8;t+=1)null==o[t][6]&&(o[t][6]=t%2==0);for(var r=8;r<i-8;r+=1)null==o[6][r]&&(o[6][r]=r%2==0)},s=function(){for(var t=B.getPatternPosition(e),r=0;r<t.length;r+=1)for(var n=0;n<t.length;n+=1){var i=t[r],a=t[n];if(null==o[i][a])for(var u=-2;u<=2;u+=1)for(var f=-2;f<=2;f+=1)o[i+u][a+f]=-2==u||2==u||-2==f||2==f||0==u&&0==f}},v=function(t){for(var r=B.getBCHTypeNumber(e),n=0;n<18;n+=1){var a=!t&&1==(r>>n&1);o[Math.floor(n/3)][n%3+i-8-3]=a}for(n=0;n<18;n+=1){a=!t&&1==(r>>n&1);o[n%3+i-8-3][Math.floor(n/3)]=a}},d=function(t,r){for(var e=n<<3|r,a=B.getBCHTypeInfo(e),u=0;u<15;u+=1){var f=!t&&1==(a>>u&1);u<6?o[u][8]=f:u<8?o[u+1][8]=f:o[i-15+u][8]=f}for(u=0;u<15;u+=1){f=!t&&1==(a>>u&1);u<8?o[8][i-u-1]=f:u<9?o[8][15-u-1+1]=f:o[8][15-u-1]=f}o[i-8][8]=!t},w=function(t,r){for(var e=-1,n=i-1,a=7,u=0,f=B.getMaskFunction(r),c=i-1;c>0;c-=2)for(6==c&&(c-=1);;){for(var g=0;g<2;g+=1)if(null==o[n][c-g]){var l=!1;u<t.length&&(l=1==(t[u]>>>a&1)),f(n,c-g)&&(l=!l),o[n][c-g]=l,-1==(a-=1)&&(u+=1,a=7)}if((n+=e)<0||i<=n){n-=e,e=-e;break}}},p=function(t,r,e){for(var n=A.getRSBlocks(t,r),o=b(),i=0;i<e.length;i+=1){var a=e[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var u=0;for(i=0;i<n.length;i+=1)u+=n[i].dataCount;if(o.getLengthInBits()>8*u)throw"code length overflow. ("+o.getLengthInBits()+">"+8*u+")";for(o.getLengthInBits()+4<=8*u&&o.put(0,4);o.getLengthInBits()%8!=0;)o.putBit(!1);for(;!(o.getLengthInBits()>=8*u||(o.put(236,8),o.getLengthInBits()>=8*u));)o.put(17,8);return function(t,r){for(var e=0,n=0,o=0,i=new Array(r.length),a=new Array(r.length),u=0;u<r.length;u+=1){var f=r[u].dataCount,c=r[u].totalCount-f;n=Math.max(n,f),o=Math.max(o,c),i[u]=new Array(f);for(var g=0;g<i[u].length;g+=1)i[u][g]=255&t.getBuffer()[g+e];e+=f;var l=B.getErrorCorrectPolynomial(c),h=k(i[u],l.getLength()-1).mod(l);for(a[u]=new Array(l.getLength()-1),g=0;g<a[u].length;g+=1){var s=g+h.getLength()-a[u].length;a[u][g]=s>=0?h.getAt(s):0}}var v=0;for(g=0;g<r.length;g+=1)v+=r[g].totalCount;var d=new Array(v),w=0;for(g=0;g<n;g+=1)for(u=0;u<r.length;u+=1)g<i[u].length&&(d[w]=i[u][g],w+=1);for(g=0;g<o;g+=1)for(u=0;u<r.length;u+=1)g<a[u].length&&(d[w]=a[u][g],w+=1);return d}(o,n)};f.addData=function(t,r){var e=null;switch(r=r||"Byte"){case"Numeric":e=M(t);break;case"Alphanumeric":e=x(t);break;case"Byte":e=m(t);break;case"Kanji":e=L(t);break;default:throw"mode:"+r}u.push(e),a=null},f.isDark=function(t,r){if(t<0||i<=t||r<0||i<=r)throw t+","+r;return o[t][r]},f.getModuleCount=function(){return i},f.make=function(){if(e<1){for(var t=1;t<40;t++){for(var r=A.getRSBlocks(t,n),o=b(),i=0;i<u.length;i++){var a=u[i];o.put(a.getMode(),4),o.put(a.getLength(),B.getLengthInBits(a.getMode(),t)),a.write(o)}var g=0;for(i=0;i<r.length;i++)g+=r[i].dataCount;if(o.getLengthInBits()<=8*g)break}e=t}c(!1,function(){for(var t=0,r=0,e=0;e<8;e+=1){c(!0,e);var n=B.getLostPoint(f);(0==e||t>n)&&(t=n,r=e)}return r}())},f.createTableTag=function(t,r){t=t||2;var e="";e+='<table style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: "+(r=void 0===r?4*t:r)+"px;",e+='">',e+="<tbody>";for(var n=0;n<f.getModuleCount();n+=1){e+="<tr>";for(var o=0;o<f.getModuleCount();o+=1)e+='<td style="',e+=" border-width: 0px; border-style: none;",e+=" border-collapse: collapse;",e+=" padding: 0px; margin: 0px;",e+=" width: "+t+"px;",e+=" height: "+t+"px;",e+=" background-color: ",e+=f.isDark(n,o)?"#000000":"#ffffff",e+=";",e+='"/>';e+="</tr>"}return e+="</tbody>",e+="</table>"},f.createSvgTag=function(t,r,e,n){var o={};"object"==typeof arguments[0]&&(t=(o=arguments[0]).cellSize,r=o.margin,e=o.alt,n=o.title),t=t||2,r=void 0===r?4*t:r,(e="string"==typeof e?{text:e}:e||{}).text=e.text||null,e.id=e.text?e.id||"qrcode-description":null,(n="string"==typeof n?{text:n}:n||{}).text=n.text||null,n.id=n.text?n.id||"qrcode-title":null;var i,a,u,c,g=f.getModuleCount()*t+2*r,l="";for(c="l"+t+",0 0,"+t+" -"+t+",0 0,-"+t+"z ",l+='<svg version="1.1" xmlns="http://www.w3.org/2000/svg"',l+=o.scalable?"":' width="'+g+'px" height="'+g+'px"',l+=' viewBox="0 0 '+g+" "+g+'" ',l+=' preserveAspectRatio="xMinYMin meet"',l+=n.text||e.text?' role="img" aria-labelledby="'+y([n.id,e.id].join(" ").trim())+'"':"",l+=">",l+=n.text?'<title id="'+y(n.id)+'">'+y(n.text)+"</title>":"",l+=e.text?'<description id="'+y(e.id)+'">'+y(e.text)+"</description>":"",l+='<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>',l+='<path d="',a=0;a<f.getModuleCount();a+=1)for(u=a*t+r,i=0;i<f.getModuleCount();i+=1)f.isDark(a,i)&&(l+="M"+(i*t+r)+","+u+c);return l+='" stroke="transparent" fill="black"/>',l+="</svg>"},f.createDataURL=function(t,r){t=t||2,r=void 0===r?4*t:r;var e=f.getModuleCount()*t+2*r,n=r,o=e-r;return I(e,e,function(r,e){if(n<=r&&r<o&&n<=e&&e<o){var i=Math.floor((r-n)/t),a=Math.floor((e-n)/t);return f.isDark(a,i)?0:1}return 1})},f.createImgTag=function(t,r,e){t=t||2,r=void 0===r?4*t:r;var n=f.getModuleCount()*t+2*r,o="";return o+="<img",o+=' src="',o+=f.createDataURL(t,r),o+='"',o+=' width="',o+=n,o+='"',o+=' height="',o+=n,o+='"',e&&(o+=' alt="',o+=y(e),o+='"'),o+="/>"};var y=function(t){for(var r="",e=0;e<t.length;e+=1){var n=t.charAt(e);switch(n){case"<":r+="&lt;";break;case">":r+="&gt;";break;case"&":r+="&amp;";break;case'"':r+="&quot;";break;default:r+=n}}return r};return f.createASCII=function(t,r){if((t=t||1)<2)return function(t){t=void 0===t?2:t;var r,e,n,o,i,a=1*f.getModuleCount()+2*t,u=t,c=a-t,g={"██":"█","█ ":"▀"," █":"▄","  ":" "},l={"██":"▀","█ ":"▀"," █":" ","  ":" "},h="";for(r=0;r<a;r+=2){for(n=Math.floor((r-u)/1),o=Math.floor((r+1-u)/1),e=0;e<a;e+=1)i="█",u<=e&&e<c&&u<=r&&r<c&&f.isDark(n,Math.floor((e-u)/1))&&(i=" "),u<=e&&e<c&&u<=r+1&&r+1<c&&f.isDark(o,Math.floor((e-u)/1))?i+=" ":i+="█",h+=t<1&&r+1>=c?l[i]:g[i];h+="\n"}return a%2&&t>0?h.substring(0,h.length-a-1)+Array(a+1).join("▀"):h.substring(0,h.length-1)}(r);t-=1,r=void 0===r?2*t:r;var e,n,o,i,a=f.getModuleCount()*t+2*r,u=r,c=a-r,g=Array(t+1).join("██"),l=Array(t+1).join("  "),h="",s="";for(e=0;e<a;e+=1){for(o=Math.floor((e-u)/t),s="",n=0;n<a;n+=1)i=1,u<=n&&n<c&&u<=e&&e<c&&f.isDark(o,Math.floor((n-u)/t))&&(i=0),s+=i?g:l;for(o=0;o<t;o+=1)h+=s+"\n"}return h.substring(0,h.length-1)},f.renderTo2dContext=function(t,r){r=r||2;for(var e=f.getModuleCount(),n=0;n<e;n++)for(var o=0;o<e;o++)t.fillStyle=f.isDark(n,o)?"black":"white",t.fillRect(n*r,o*r,r,r)},f};t.stringToBytes=(t.stringToBytesFuncs={default:function(t){for(var r=[],e=0;e<t.length;e+=1){var n=t.charCodeAt(e);r.push(255&n)}return r}}).default,t.createStringToBytes=function(t,r){var e=function(){for(var e=S(t),n=function(){var t=e.read();if(-1==t)throw"eof";return t},o=0,i={};;){var a=e.read();if(-1==a)break;var u=n(),f=n()<<8|n();i[String.fromCharCode(a<<8|u)]=f,o+=1}if(o!=r)throw o+" != "+r;return i}(),n="?".charCodeAt(0);return function(t){for(var r=[],o=0;o<t.length;o+=1){var i=t.charCodeAt(o);if(i<128)r.push(i);else{var a=e[t.charAt(o)];"number"==typeof a?(255&a)==a?r.push(a):(r.push(a>>>8),r.push(255&a)):r.push(n)}}return r}};var r,e,n,o,i,a=1,u=2,f=4,c=8,g={L:1,M:0,Q:3,H:2},l=0,h=1,s=2,v=3,d=4,w=5,p=6,y=7,B=(r=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],e=1335,n=7973,i=function(t){for(var r=0;0!=t;)r+=1,t>>>=1;return r},(o={}).getBCHTypeInfo=function(t){for(var r=t<<10;i(r)-i(e)>=0;)r^=e<<i(r)-i(e);return 21522^(t<<10|r)},o.getBCHTypeNumber=function(t){for(var r=t<<12;i(r)-i(n)>=0;)r^=n<<i(r)-i(n);return t<<12|r},o.getPatternPosition=function(t){return r[t-1]},o.getMaskFunction=function(t){switch(t){case l:return function(t,r){return(t+r)%2==0};case h:return function(t,r){return t%2==0};case s:return function(t,r){return r%3==0};case v:return function(t,r){return(t+r)%3==0};case d:return function(t,r){return(Math.floor(t/2)+Math.floor(r/3))%2==0};case w:return function(t,r){return t*r%2+t*r%3==0};case p:return function(t,r){return(t*r%2+t*r%3)%2==0};case y:return function(t,r){return(t*r%3+(t+r)%2)%2==0};default:throw"bad maskPattern:"+t}},o.getErrorCorrectPolynomial=function(t){for(var r=k([1],0),e=0;e<t;e+=1)r=r.multiply(k([1,C.gexp(e)],0));return r},o.getLengthInBits=function(t,r){if(1<=r&&r<10)switch(t){case a:return 10;case u:return 9;case f:case c:return 8;default:throw"mode:"+t}else if(r<27)switch(t){case a:return 12;case u:return 11;case f:return 16;case c:return 10;default:throw"mode:"+t}else{if(!(r<41))throw"type:"+r;switch(t){case a:return 14;case u:return 13;case f:return 16;case c:return 12;default:throw"mode:"+t}}},o.getLostPoint=function(t){for(var r=t.getModuleCount(),e=0,n=0;n<r;n+=1)for(var o=0;o<r;o+=1){for(var i=0,a=t.isDark(n,o),u=-1;u<=1;u+=1)if(!(n+u<0||r<=n+u))for(var f=-1;f<=1;f+=1)o+f<0||r<=o+f||0==u&&0==f||a==t.isDark(n+u,o+f)&&(i+=1);i>5&&(e+=3+i-5)}for(n=0;n<r-1;n+=1)for(o=0;o<r-1;o+=1){var c=0;t.isDark(n,o)&&(c+=1),t.isDark(n+1,o)&&(c+=1),t.isDark(n,o+1)&&(c+=1),t.isDark(n+1,o+1)&&(c+=1),0!=c&&4!=c||(e+=3)}for(n=0;n<r;n+=1)for(o=0;o<r-6;o+=1)t.isDark(n,o)&&!t.isDark(n,o+1)&&t.isDark(n,o+2)&&t.isDark(n,o+3)&&t.isDark(n,o+4)&&!t.isDark(n,o+5)&&t.isDark(n,o+6)&&(e+=40);for(o=0;o<r;o+=1)for(n=0;n<r-6;n+=1)t.isDark(n,o)&&!t.isDark(n+1,o)&&t.isDark(n+2,o)&&t.isDark(n+3,o)&&t.isDark(n+4,o)&&!t.isDark(n+5,o)&&t.isDark(n+6,o)&&(e+=40);var g=0;for(o=0;o<r;o+=1)for(n=0;n<r;n+=1)t.isDark(n,o)&&(g+=1);return e+=Math.abs(100*g/r/r-50)/5*10},o),C=function(){for(var t=new Array(256),r=new Array(256),e=0;e<8;e+=1)t[e]=1<<e;for(e=8;e<256;e+=1)t[e]=t[e-4]^t[e-5]^t[e-6]^t[e-8];for(e=0;e<255;e+=1)r[t[e]]=e;var n={glog:function(t){if(t<1)throw"glog("+t+")";return r[t]},gexp:function(r){for(;r<0;)r+=255;for(;r>=256;)r-=255;return t[r]}};return n}();function k(t,r){if(void 0===t.length)throw t.length+"/"+r;var e=function(){for(var e=0;e<t.length&&0==t[e];)e+=1;for(var n=new Array(t.length-e+r),o=0;o<t.length-e;o+=1)n[o]=t[o+e];return n}(),n={getAt:function(t){return e[t]},getLength:function(){return e.length},multiply:function(t){for(var r=new Array(n.getLength()+t.getLength()-1),e=0;e<n.getLength();e+=1)for(var o=0;o<t.getLength();o+=1)r[e+o]^=C.gexp(C.glog(n.getAt(e))+C.glog(t.getAt(o)));return k(r,0)},mod:function(t){if(n.getLength()-t.getLength()<0)return n;for(var r=C.glog(n.getAt(0))-C.glog(t.getAt(0)),e=new Array(n.getLength()),o=0;o<n.getLength();o+=1)e[o]=n.getAt(o);for(o=0;o<t.getLength();o+=1)e[o]^=C.gexp(C.glog(t.getAt(o))+r);return k(e,0).mod(t)}};return n}var A=function(){var t=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12,7,37,13],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]],r=function(t,r){var e={};return e.totalCount=t,e.dataCount=r,e},e={};return e.getRSBlocks=function(e,n){var o=function(r,e){switch(e){case g.L:return t[4*(r-1)+0];case g.M:return t[4*(r-1)+1];case g.Q:return t[4*(r-1)+2];case g.H:return t[4*(r-1)+3];default:return}}(e,n);if(void 0===o)throw"bad rs block @ typeNumber:"+e+"/errorCorrectionLevel:"+n;for(var i=o.length/3,a=[],u=0;u<i;u+=1)for(var f=o[3*u+0],c=o[3*u+1],l=o[3*u+2],h=0;h<f;h+=1)a.push(r(c,l));return a},e}(),b=function(){var t=[],r=0,e={getBuffer:function(){return t},getAt:function(r){var e=Math.floor(r/8);return 1==(t[e]>>>7-r%8&1)},put:function(t,r){for(var n=0;n<r;n+=1)e.putBit(1==(t>>>r-n-1&1))},getLengthInBits:function(){return r},putBit:function(e){var n=Math.floor(r/8);t.length<=n&&t.push(0),e&&(t[n]|=128>>>r%8),r+=1}};return e},M=function(t){var r=a,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+2<r.length;)t.put(o(r.substring(n,n+3)),10),n+=3;n<r.length&&(r.length-n==1?t.put(o(r.substring(n,n+1)),4):r.length-n==2&&t.put(o(r.substring(n,n+2)),7))}},o=function(t){for(var r=0,e=0;e<t.length;e+=1)r=10*r+i(t.charAt(e));return r},i=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);throw"illegal char :"+t};return n},x=function(t){var r=u,e=t,n={getMode:function(){return r},getLength:function(t){return e.length},write:function(t){for(var r=e,n=0;n+1<r.length;)t.put(45*o(r.charAt(n))+o(r.charAt(n+1)),11),n+=2;n<r.length&&t.put(o(r.charAt(n)),6)}},o=function(t){if("0"<=t&&t<="9")return t.charCodeAt(0)-"0".charCodeAt(0);if("A"<=t&&t<="Z")return t.charCodeAt(0)-"A".charCodeAt(0)+10;switch(t){case" ":return 36;case"$":return 37;case"%":return 38;case"*":return 39;case"+":return 40;case"-":return 41;case".":return 42;case"/":return 43;case":":return 44;default:throw"illegal char :"+t}};return n},m=function(r){var e=f,n=t.stringToBytes(r),o={getMode:function(){return e},getLength:function(t){return n.length},write:function(t){for(var r=0;r<n.length;r+=1)t.put(n[r],8)}};return o},L=function(r){var e=c,n=t.stringToBytesFuncs.SJIS;if(!n)throw"sjis not supported.";!function(){var t=n("友");if(2!=t.length||38726!=(t[0]<<8|t[1]))throw"sjis not supported."}();var o=n(r),i={getMode:function(){return e},getLength:function(t){return~~(o.length/2)},write:function(t){for(var r=o,e=0;e+1<r.length;){var n=(255&r[e])<<8|255&r[e+1];if(33088<=n&&n<=40956)n-=33088;else{if(!(57408<=n&&n<=60351))throw"illegal char at "+(e+1)+"/"+n;n-=49472}n=192*(n>>>8&255)+(255&n),t.put(n,13),e+=2}if(e<r.length)throw"illegal char at "+(e+1)}};return i},D=function(){var t=[],r={writeByte:function(r){t.push(255&r)},writeShort:function(t){r.writeByte(t),r.writeByte(t>>>8)},writeBytes:function(t,e,n){e=e||0,n=n||t.length;for(var o=0;o<n;o+=1)r.writeByte(t[o+e])},writeString:function(t){for(var e=0;e<t.length;e+=1)r.writeByte(t.charCodeAt(e))},toByteArray:function(){return t},toString:function(){var r="";r+="[";for(var e=0;e<t.length;e+=1)e>0&&(r+=","),r+=t[e];return r+="]"}};return r},S=function(t){var r=t,e=0,n=0,o=0,i={read:function(){for(;o<8;){if(e>=r.length){if(0==o)return-1;throw"unexpected end of file./"+o}var t=r.charAt(e);if(e+=1,"="==t)return o=0,-1;t.match(/^\s$/)||(n=n<<6|a(t.charCodeAt(0)),o+=6)}var i=n>>>o-8&255;return o-=8,i}},a=function(t){if(65<=t&&t<=90)return t-65;if(97<=t&&t<=122)return t-97+26;if(48<=t&&t<=57)return t-48+52;if(43==t)return 62;if(47==t)return 63;throw"c:"+t};return i},I=function(t,r,e){for(var n=function(t,r){var e=t,n=r,o=new Array(t*r),i={setPixel:function(t,r,n){o[r*e+t]=n},write:function(t){t.writeString("GIF87a"),t.writeShort(e),t.writeShort(n),t.writeByte(128),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(0),t.writeByte(255),t.writeByte(255),t.writeByte(255),t.writeString(","),t.writeShort(0),t.writeShort(0),t.writeShort(e),t.writeShort(n),t.writeByte(0);var r=a(2);t.writeByte(2);for(var o=0;r.length-o>255;)t.writeByte(255),t.writeBytes(r,o,255),o+=255;t.writeByte(r.length-o),t.writeBytes(r,o,r.length-o),t.writeByte(0),t.writeString(";")}},a=function(t){for(var r=1<<t,e=1+(1<<t),n=t+1,i=u(),a=0;a<r;a+=1)i.add(String.fromCharCode(a));i.add(String.fromCharCode(r)),i.add(String.fromCharCode(e));var f,c,g,l=D(),h=(f=l,c=0,g=0,{write:function(t,r){if(t>>>r!=0)throw"length over";for(;c+r>=8;)f.writeByte(255&(t<<c|g)),r-=8-c,t>>>=8-c,g=0,c=0;g|=t<<c,c+=r},flush:function(){c>0&&f.writeByte(g)}});h.write(r,n);var s=0,v=String.fromCharCode(o[s]);for(s+=1;s<o.length;){var d=String.fromCharCode(o[s]);s+=1,i.contains(v+d)?v+=d:(h.write(i.indexOf(v),n),i.size()<4095&&(i.size()==1<<n&&(n+=1),i.add(v+d)),v=d)}return h.write(i.indexOf(v),n),h.write(e,n),h.flush(),l.toByteArray()},u=function(){var t={},r=0,e={add:function(n){if(e.contains(n))throw"dup key:"+n;t[n]=r,r+=1},size:function(){return r},indexOf:function(r){return t[r]},contains:function(r){return void 0!==t[r]}};return e};return i}(t,r),o=0;o<r;o+=1)for(var i=0;i<t;i+=1)n.setPixel(i,o,e(i,o));var a=D();n.write(a);for(var u=function(){var t=0,r=0,e=0,n="",o={},i=function(t){n+=String.fromCharCode(a(63&t))},a=function(t){if(t<0);else{if(t<26)return 65+t;if(t<52)return t-26+97;if(t<62)return t-52+48;if(62==t)return 43;if(63==t)return 47}throw"n:"+t};return o.writeByte=function(n){for(t=t<<8|255&n,r+=8,e+=1;r>=6;)i(t>>>r-6),r-=6},o.flush=function(){if(r>0&&(i(t<<6-r),t=0,r=0),e%3!=0)for(var o=3-e%3,a=0;a<o;a+=1)n+="="},o.toString=function(){return n},o}(),f=a.toByteArray(),c=0;c<f.length;c+=1)u.writeByte(f[c]);return u.flush(),"data:image/gif;base64,"+u};return t}();qrcode.stringToBytesFuncs["UTF-8"]=function(t){return function(t){for(var r=[],e=0;e<t.length;e++){var n=t.charCodeAt(e);n<128?r.push(n):n<2048?r.push(192|n>>6,128|63&n):n<55296||n>=57344?r.push(224|n>>12,128|n>>6&63,128|63&n):(e++,n=65536+((1023&n)<<10|1023&t.charCodeAt(e)),r.push(240|n>>18,128|n>>12&63,128|n>>6&63,128|63&n))}return r}(t)},function(t){"function"==typeof define&&define.amd?define([],t):"object"==typeof exports&&(module.exports=t())}(function(){return qrcode});
+
+</script>
+<script>
+(function () {
+  'use strict';
+  /* =====================================================================
+     SHRIMPLY · one shopping list for the whole house.
+     A Bouncy Production · Made for Haz
+     ===================================================================== */
+  const DB = String((window.SYNC_CONFIG && window.SYNC_CONFIG.databaseURL) || '').trim().replace(/\/+$/, '');
+  const CODE_RE = /^[A-HJKMNP-Z2-9]{6}$/;
+  const ALPHA = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+  const AUTO_CLEAR_MS = 3 * 3600 * 1000;      // trolley clears itself after 3 quiet hours
+  const STORE = 'shrimplyStore1';
+
+  const AISLES = [
+    ['fv', 'Fruit & veg', '#7ed957'], ['da', 'Dairy & eggs', '#6ec1ff'], ['ba', 'Bakery', '#ffc93c'],
+    ['mf', 'Meat & fish', '#ff8fa3'], ['fr', 'Frozen', '#8ee3ef'], ['pa', 'Pantry', '#ffb38a'],
+    ['dr', 'Drinks', '#5ee0b8'], ['ho', 'Household', '#c79bff'], ['ot', 'Other', '#e5e0d8'],
+  ];
+  const AK = AISLES.map((a) => a[0]);
+  const AISLE = Object.fromEntries(AISLES.map((a) => [a[0], { name: a[1], col: a[2] }]));
+
+  /* --- aisle guessing: phrases first, then the last word ("oat milk" → milk), then the others --- */
+  const PHRASES = {
+    'ice cream': 'fr', 'fish fingers': 'fr', 'frozen peas': 'fr', 'oven chips': 'fr', 'ice lollies': 'fr',
+    'chopped tomatoes': 'pa', 'tinned tomatoes': 'pa', 'tomato puree': 'pa', 'baked beans': 'pa', 'peanut butter': 'pa',
+    'coconut milk': 'pa', 'stock cubes': 'pa', 'olive oil': 'pa', 'soy sauce': 'pa', 'tinned tuna': 'pa', 'hot chocolate': 'pa',
+    'green beans': 'fv', 'runner beans': 'fv', 'butternut squash': 'fv', 'spring onions': 'fv', 'sweet potato': 'fv', 'sweet potatoes': 'fv',
+    'kitchen roll': 'ho', 'loo roll': 'ho', 'toilet roll': 'ho', 'bin bags': 'ho', 'washing up liquid': 'ho', 'washing-up liquid': 'ho',
+    'washing powder': 'ho', 'dishwasher tablets': 'ho', 'fabric softener': 'ho', 'cling film': 'ho', 'tin foil': 'ho',
+    'creme fraiche': 'da', 'sour cream': 'da', 'cream cheese': 'da', 'hot cross buns': 'ba', 'garlic bread': 'ba', 'tuna steak': 'mf',
+    'sparkling water': 'dr', 'orange juice': 'dr', 'apple juice': 'dr', 'ginger beer': 'dr',
+  };
+  const WORDS = {
+    fv: 'apple banana orange satsuma clementine lemon lime grape pear peach plum nectarine mango pineapple melon watermelon kiwi berry berries strawberry raspberry blueberry blackberry avocado tomato potato spud onion shallot garlic ginger carrot parsnip broccoli cauliflower cabbage kale spinach lettuce salad rocket cucumber courgette aubergine peppers chilli mushroom celery leek sweetcorn corn coriander parsley basil mint thyme rosemary asparagus beetroot pumpkin swede turnip radish fruit veg veggies herbs cherries cherry',
+    da: 'milk butter cheese cheddar mozzarella parmesan feta halloumi brie yoghurt yogurt cream eggs egg custard margarine spread quark',
+    ba: 'bread loaf sourdough bagel baguette roll rolls wrap wraps tortilla pitta naan croissant crumpet muffin cake bun buns brioche teacake scone',
+    mf: 'chicken beef mince pork lamb bacon sausage ham turkey steak salmon fish cod haddock prawn prawns chorizo salami gammon duck mackerel',
+    fr: 'frozen peas pizza lolly lollies sorbet',
+    pa: 'pasta spaghetti penne fusilli lasagne rice noodles flour sugar oats porridge cereal granola muesli beans lentils chickpeas soup stock gravy oil vinegar salt pepper spice spices sauce ketchup mayo mayonnaise mustard honey jam marmalade nutella coffee tea teabags biscuits crisps chocolate snacks nuts crackers couscous quinoa tuna tins tin puree pesto curry paste syrup cocoa raisins yeast',
+    dr: 'juice squash water lemonade cola coke beer wine cider gin vodka prosecco tonic lager pop',
+    ho: 'bleach sponge sponges foil clingfilm batteries tissues soap shampoo conditioner toothpaste toothbrush deodorant detergent cleaner spray nappies wipes razors plasters lightbulb candles bags',
+  };
+  const WORD = {};
+  Object.keys(WORDS).forEach((a) => WORDS[a].split(/\s+/).forEach((w) => { if (!WORD[w]) WORD[w] = a; }));
+  function lookWord(w) {
+    if (WORD[w]) return WORD[w];
+    if (w.length > 3 && w.endsWith('es') && WORD[w.slice(0, -2)]) return WORD[w.slice(0, -2)];
+    if (w.length > 2 && w.endsWith('s') && WORD[w.slice(0, -1)]) return WORD[w.slice(0, -1)];
+    if (w.endsWith('ies') && WORD[w.slice(0, -3) + 'y']) return WORD[w.slice(0, -3) + 'y'];
+    return null;
+  }
+  function guessAisle(name) {
+    const s = String(name || '').toLowerCase().replace(/[^a-z\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!s) return 'ot';
+    if (/^frozen\b/.test(s)) return 'fr';
+    for (const p in PHRASES) if ((' ' + s + ' ').includes(' ' + p + ' ')) return PHRASES[p];
+    const ws = s.split(/[\s-]+/).filter(Boolean);
+    for (let i = ws.length - 1; i >= 0; i--) { const a = lookWord(ws[i]); if (a) return a; }
+    return 'ot';
+  }
+
+  /* --- names, keys, quantities --- */
+  const tidyName = (s) => { s = String(s || '').replace(/\s+/g, ' ').trim().slice(0, 60); return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
+  const keyOf = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'x';
+  function parseAdd(raw) {
+    let s = String(raw || '').replace(/\s+/g, ' ').trim(), q = '';
+    let m = s.match(/^(\d{1,3})\s*[x×]?\s+(.+)$/i);
+    if (m && +m[1] > 0) { q = '×' + (+m[1]); s = m[2]; }
+    else if ((m = s.match(/^(.+?)\s*[x×]\s*(\d{1,3})$/i)) && +m[2] > 0) { q = '×' + (+m[2]); s = m[1]; }
+    return { n: tidyName(s), q };
+  }
+  const newId = () => 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  function newCode() { let c = ''; const r = new Uint32Array(6); try { crypto.getRandomValues(r); } catch (e) { for (let i = 0; i < 6; i++) r[i] = Math.floor(Math.random() * 1e9); } for (let i = 0; i < 6; i++) c += ALPHA[r[i] % ALPHA.length]; return c; }
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const obj = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
+  const clone = (v) => (v == null ? v : JSON.parse(JSON.stringify(v)));
+  const TS = { '.sv': 'timestamp' };
+
+  /* --- the tree: set a path, resolve Firebase server values, apply a write --- */
+  function getPath(t, path) { let o = t; for (const p of String(path || '').split('/').filter(Boolean)) { if (!o || typeof o !== 'object') return undefined; o = o[p]; } return o; }
+  function resolveSv(v, cur, now) {
+    if (v && typeof v === 'object') {
+      if (v['.sv'] === 'timestamp') return now;
+      if (v['.sv'] && typeof v['.sv'] === 'object' && 'increment' in v['.sv']) return (typeof cur === 'number' ? cur : 0) + (+v['.sv'].increment || 0);
+      const o = {}; Object.keys(v).forEach((k) => { o[k] = resolveSv(v[k], cur && typeof cur === 'object' ? cur[k] : undefined, now); }); return o;
+    }
+    return v;
+  }
+  function setPath(t, path, val) {
+    const parts = String(path || '').split('/').filter(Boolean);
+    if (!parts.length) return val && typeof val === 'object' ? val : {};
+    t = obj(t); let o = t; const trail = [];
+    for (let i = 0; i < parts.length - 1; i++) { if (!o[parts[i]] || typeof o[parts[i]] !== 'object') o[parts[i]] = {}; trail.push([o, parts[i]]); o = o[parts[i]]; }
+    const k = parts[parts.length - 1];
+    if (val === null || val === undefined) delete o[k]; else o[k] = val;
+    for (let i = trail.length - 1; i >= 0; i--) { const [par, key] = trail[i]; if (par[key] && typeof par[key] === 'object' && !Object.keys(par[key]).length) delete par[key]; }
+    return t;
+  }
+  // op = {m:'PUT'|'DELETE'|'PATCH', p:'items/abc', b:body}. PATCH keys may be deep paths ("usual/milk/c").
+  function applyOp(t, op, now) {
+    now = now || Date.now();
+    if (op.m === 'DELETE') return setPath(t, op.p, null);
+    if (op.m === 'PUT') return setPath(t, op.p, resolveSv(clone(op.b), getPath(t, op.p), now));
+    if (op.m === 'PATCH') { Object.keys(obj(op.b)).forEach((k) => { const full = (op.p ? op.p + '/' : '') + k; t = setPath(t, full, resolveSv(clone(op.b[k]), getPath(t, full), now)); }); return t; }
+    return t;
+  }
+
+  /* --- reading the list out of the tree --- */
+  function itemsOf(tree) {
+    const it = obj(obj(tree).items);
+    return Object.keys(it).map((id) => Object.assign({ id }, obj(it[id])))
+      .filter((x) => typeof x.n === 'string' && x.n && (x.s === 'need' || x.s === 'got'))
+      .map((x) => (AISLE[x.a] ? x : Object.assign(x, { a: 'ot' })));
+  }
+  const byAisle = (a, b) => AK.indexOf(a.a) - AK.indexOf(b.a) || (a.c || 0) - (b.c || 0) || (a.id < b.id ? -1 : 1);
+  function usualsOf(tree) {
+    const u = obj(obj(tree).usual);
+    return Object.keys(u).map((k) => Object.assign({ k }, obj(u[k])))
+      .filter((x) => typeof x.n === 'string' && x.n)
+      .map((x) => Object.assign(x, { a: AISLE[x.a] ? x.a : guessAisle(x.n), c: typeof x.c === 'number' ? Math.max(0, x.c) : 0 }))
+      .sort((a, b) => b.c - a.c || (b.t || 0) - (a.t || 0) || a.n.localeCompare(b.n));
+  }
+  const aisleFor = (tree, name) => { const u = obj(obj(obj(tree).usual)[keyOf(name)]); return AISLE[u.a] ? u.a : guessAisle(name); };
+  // the trolley clears itself once nobody has ticked anything for AUTO_CLEAR_MS
+  function staleTrolley(items, now) {
+    const got = items.filter((x) => x.s === 'got');
+    if (!got.length) return [];
+    const last = Math.max.apply(null, got.map((x) => x.g || 0));
+    return now - last >= AUTO_CLEAR_MS ? got : [];
+  }
+
+  /* --- the writes the app makes --- */
+  const W = {
+    add(tree, raw, now) {        // → {ops, item, dupe}
+      const p = typeof raw === 'string' ? parseAdd(raw) : { n: tidyName(raw.n), q: String(raw.q || '').trim().slice(0, 40) };
+      if (!p.n) return null;
+      const k = keyOf(p.n);
+      const dupe = itemsOf(tree).find((x) => x.s === 'need' && keyOf(x.n) === k);
+      if (dupe) return { ops: [], item: dupe, dupe: true };
+      const a = typeof raw === 'object' && AISLE[raw.a] ? raw.a : aisleFor(tree, p.n);
+      const id = newId();
+      const item = { n: p.n, a, s: 'need', c: now };
+      if (p.q) item.q = p.q;
+      const ops = [{ m: 'PUT', p: 'items/' + id, b: item }];
+      if (!obj(obj(tree).usual)[k]) ops.push({ m: 'PATCH', p: 'usual/' + k, b: { n: p.n, a, t: now } });
+      return { ops, item: Object.assign({ id }, item), dupe: false };
+    },
+    tick(tree, id, on, now) {    // ticking counts towards the usuals (and unticking takes it back)
+      const x = itemsOf(tree).find((i) => i.id === id);
+      if (!x || (x.s === 'got') === !!on) return [];
+      // the count is written as a plain number, not a server increment, so a retry on a flaky
+      // signal can't count the same tick twice (two phones at once may be off by one: harmless)
+      const k = keyOf(x.n), body = { n: x.n, a: x.a, s: on ? 'got' : 'need', c: x.c || now };
+      const was = obj(obj(obj(tree).usual)[k]).c, cnt = Math.max(0, (typeof was === 'number' ? was : 0) + (on ? 1 : -1));
+      if (x.q) body.q = x.q;
+      if (on) body.g = now;
+      const b = { ['items/' + id]: body, ['usual/' + k + '/c']: cnt, ['usual/' + k + '/n']: x.n, ['usual/' + k + '/a']: x.a };
+      if (on) b['usual/' + k + '/t'] = now;
+      return [{ m: 'PATCH', p: '', b }];
+    },
+    edit(tree, id, f) {
+      const x = itemsOf(tree).find((i) => i.id === id);
+      if (!x) return [];
+      const n = tidyName(f.n) || x.n, a = AISLE[f.a] ? f.a : x.a, q = String(f.q == null ? x.q || '' : f.q).trim().slice(0, 40);
+      const body = { n, a, s: x.s, c: x.c || Date.now() };
+      if (q) body.q = q;
+      if (x.g) body.g = x.g;
+      const ops = [{ m: 'PUT', p: 'items/' + id, b: body }];
+      if (n !== x.n || a !== x.a) ops.push({ m: 'PATCH', p: 'usual/' + keyOf(n), b: { n, a } });   // remember the aisle for next time
+      return ops;
+    },
+    remove: (id) => [{ m: 'DELETE', p: 'items/' + id }],
+    clear(items) { if (!items.length) return []; const b = {}; items.forEach((x) => { b['items/' + x.id] = null; }); return [{ m: 'PATCH', p: '', b }]; },
+    forget: (k) => [{ m: 'DELETE', p: 'usual/' + k }],
+  };
+
+  /* =====================================================================
+     STORAGE · the code, the last copy of the list, and any changes still
+     waiting for signal all live in localStorage, so the app opens in a shop
+     with no bars and nothing typed offline is lost if the phone is closed.
+     ===================================================================== */
+  let storeOk = true;
+  function load() { try { const v = JSON.parse(localStorage.getItem(STORE)); return v && typeof v === 'object' ? v : {}; } catch (e) { storeOk = false; return {}; } }
+  function save(v) { try { localStorage.setItem(STORE, JSON.stringify(v)); storeOk = true; } catch (e) { storeOk = false; } }
+  try { const t = '__shrimply'; localStorage.setItem(t, '1'); localStorage.removeItem(t); } catch (e) { storeOk = false; }
+
+  /* =====================================================================
+     TRANSPORTS · both give send(op) → Promise, and push the server's copy of
+     the list into onServer(path, data, merge). Firebase is plain REST + SSE.
+     ===================================================================== */
+  function makeFirebase(code, h) {
+    const base = DB + '/lists/' + code;
+    const url = (p) => base + (p ? '/' + p : '') + '.json';
+    let es = null, closed = false, lastEv = 0, wd = null;
+    async function req(method, p, body) {
+      const r = await fetch(url(p), { method, headers: body !== undefined ? { 'Content-Type': 'application/json' } : undefined, body: body !== undefined ? JSON.stringify(body) : undefined, cache: 'no-store' });
+      if (r.status === 401 || r.status === 403) { const e = new Error('denied'); e.denied = true; throw e; }
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.status === 204 ? null : r.json();
+    }
+    function onEv(e, merge) {
+      lastEv = Date.now();
+      let m; try { m = JSON.parse(e.data); } catch (err) { return; }
+      if (!m || typeof m.path !== 'string') return;
+      h.onServer(m.path, m.data, merge);
+    }
+    function open() {
+      if (closed) return;
+      try { if (es) es.close(); } catch (e) {}
+      es = new EventSource(url(''));
+      es.addEventListener('put', (e) => onEv(e, false));
+      es.addEventListener('patch', (e) => onEv(e, true));
+      es.addEventListener('keep-alive', () => { lastEv = Date.now(); });
+      es.addEventListener('cancel', () => h.onStatus('denied'));
+      es.addEventListener('auth_revoked', () => h.onStatus('denied'));
+      es.onopen = () => { lastEv = Date.now(); h.onStatus('online'); };
+      es.onerror = () => {
+        h.onStatus(navigator.onLine === false ? 'offline' : 'connecting');
+        req('GET', 'made').then(() => {}, (e) => { if (e.denied) h.onStatus('denied'); else h.onStatus('offline'); });  // a stream the rules refuse looks like any other error
+      };
+    }
+    const onOnline = () => { if (!closed) open(); };
+    window.addEventListener('online', onOnline);
+    wd = setInterval(() => { if (!closed && (!es || es.readyState === 2 || Date.now() - lastEv > 75000)) open(); }, 10000);
+    h.onStatus('connecting'); open();
+    return {
+      demo: false,
+      send: (op) => req(op.m, op.p, op.m === 'DELETE' ? undefined : op.b),
+      reopen: open,
+      close() { closed = true; clearInterval(wd); window.removeEventListener('online', onOnline); try { es && es.close(); } catch (e) {} },
+    };
+  }
+  // No Firebase address yet? A demo list shared between tabs of this one browser.
+  function makeDemo(code, h) {
+    const LK = 'shrimplyDemo_' + code;
+    let bc = null; try { bc = new BroadcastChannel('shrimply-' + code); } catch (e) {}
+    const read = () => { try { return JSON.parse(localStorage.getItem(LK)) || {}; } catch (e) { return {}; } };
+    const pull = () => h.onServer('/', read(), false);
+    if (bc) bc.onmessage = pull;
+    const onStore = (e) => { if (e.key === LK) pull(); };
+    window.addEventListener('storage', onStore);
+    setTimeout(() => { h.onStatus('demo'); pull(); }, 0);
+    return {
+      demo: true,
+      send(op) { const t = applyOp(read(), op, Date.now()); try { localStorage.setItem(LK, JSON.stringify(t)); } catch (e) {} if (bc) bc.postMessage(1); pull(); return Promise.resolve(); },
+      reopen() {},
+      close() { window.removeEventListener('storage', onStore); try { bc && bc.close(); } catch (e) {} },
+    };
+  }
+  async function listExists(code) {
+    if (!DB) { try { return !!JSON.parse(localStorage.getItem('shrimplyDemo_' + code) || 'null'); } catch (e) { return false; } }
+    const r = await fetch(DB + '/lists/' + code + '/made.json', { cache: 'no-store' });
+    if (r.status === 401 || r.status === 403) { const e = new Error('denied'); e.denied = true; throw e; }
+    if (!r.ok) throw new Error('http ' + r.status);
+    return (await r.json()) != null;
+  }
+
+  /* =====================================================================
+     SYNC · server copy + queue of our own unsent writes = what you see.
+     Writes show at once, queue while offline, and go out in order.
+     ===================================================================== */
+  const sync = { code: null, server: {}, queue: [], status: '', tx: null, flushing: false, retryT: null, backoff: 4000, onChange: () => {} };
+  const view = () => sync.queue.reduce((t, op) => applyOp(t, op, op.at), clone(sync.server) || {});
+  let saveT = null;
+  function persist(now) {
+    clearTimeout(saveT);
+    const go = () => { if (!sync.code) return; save({ code: sync.code, tree: sync.server, queue: sync.queue }); };
+    if (now) go(); else saveT = setTimeout(go, 300);
+  }
+  function setStatus(s) { if (s === sync.status) return; sync.status = s; if (s === 'online' || s === 'demo') { sync.backoff = 4000; flush(); } sync.onChange('status'); }
+  function connect(code, fresh) {
+    disconnect();
+    const st = load();
+    sync.code = code;
+    sync.server = !fresh && st.code === code ? obj(st.tree) : {};
+    sync.queue = !fresh && st.code === code && Array.isArray(st.queue) ? st.queue.filter((o) => o && o.m && typeof o.p === 'string') : [];
+    sync.status = '';
+    const h = {
+      onServer(path, data, merge) {
+        if (merge) Object.keys(obj(data)).forEach((k) => { sync.server = setPath(sync.server, (path === '/' ? '' : path) + '/' + k, data[k]); });
+        else sync.server = setPath(sync.server, path, data);
+        persist(); sync.onChange('tree');
+      },
+      onStatus: setStatus,
+    };
+    sync.tx = DB ? makeFirebase(code, h) : makeDemo(code, h);
+    persist(true); sync.onChange('tree'); flush();
+  }
+  function disconnect() { clearTimeout(sync.retryT); if (sync.tx) sync.tx.close(); sync.tx = null; sync.code = null; sync.server = {}; sync.queue = []; sync.status = ''; }
+  function write(ops) {
+    if (!ops || !ops.length || !sync.code) return;
+    const now = Date.now();
+    ops.forEach((op) => {
+      op.at = now;
+      if (op.m === 'PUT' || op.m === 'DELETE') {          // a newer whole-item write replaces an older one still waiting
+        const from = sync.flushing ? 1 : 0;
+        for (let i = sync.queue.length - 1; i >= from; i--) { const q = sync.queue[i]; if ((q.m === 'PUT' || q.m === 'DELETE') && q.p === op.p) sync.queue.splice(i, 1); }
+      }
+      sync.queue.push(op);
+    });
+    persist(true); sync.onChange('tree'); flush();
+  }
+  async function flush() {
+    if (sync.flushing || !sync.tx) return;
+    sync.flushing = true; clearTimeout(sync.retryT);
+    const tx = sync.tx;
+    try {
+      while (sync.queue.length && sync.tx === tx) {
+        const op = sync.queue[0];
+        try {
+          const body = op.m === 'DELETE' ? undefined : op.b;
+          await tx.send({ m: op.m, p: op.p, b: body });
+          if (sync.tx !== tx) break;
+          sync.server = applyOp(sync.server, op, Date.now());   // keep it on screen until the server's echo lands
+          sync.queue.shift(); persist();
+          if (sync.status === 'offline' || sync.status === 'connecting') tx.reopen();
+        } catch (e) {
+          if (e && e.denied) { sync.queue.shift(); persist(); setStatus('denied'); continue; }
+          if (sync.status !== 'denied') setStatus(navigator.onLine === false || sync.status !== 'online' ? 'offline' : 'connecting');
+          sync.retryT = setTimeout(flush, sync.backoff); sync.backoff = Math.min(30000, sync.backoff * 2);
+          break;
+        }
+      }
+    } finally { sync.flushing = false; sync.onChange('queue'); }
+  }
+
+  /* =====================================================================
+     THE SHRIMP · drawing and chatter. Add your own lines in shrimp-messages.js.
+     ===================================================================== */
+  function shrimpSvg(w) {
+    return `<svg class="shrimp" viewBox="0 0 210 200" width="${w}" height="${Math.round(w * 0.95)}" aria-hidden="true" focusable="false"><path d="M84 150 L26 110 Q12 146 30 152 Q12 164 26 198 Z" fill="#ff9f6b" stroke="#2b1b3d" stroke-width="7" stroke-linejoin="round"/><path d="M78 151 L32 152" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round"/><path d="M100 176 l-8 16 M118 178 l-3 17 M136 172 l3 16 M152 160 l10 12" stroke="#2b1b3d" stroke-width="6" stroke-linecap="round"/><path d="M150 72 C172 122 124 166 74 152" fill="none" stroke="#2b1b3d" stroke-width="66" stroke-linecap="round"/><path d="M150 72 C172 122 124 166 74 152" fill="none" stroke="#ff7a59" stroke-width="52" stroke-linecap="round"/><path d="M140 110 L168 118 M131 128 L150 146 M114 137 L118 162" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round"/><path d="M150 42 C160 10 185 6 200 16 M140 42 C138 12 120 4 104 10" fill="none" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round"/><path d="M182 58 L206 50 L188 74 Z" fill="#ff7a59" stroke="#2b1b3d" stroke-width="5" stroke-linejoin="round"/><ellipse cx="152" cy="70" rx="38" ry="34" fill="#ff7a59" stroke="#2b1b3d" stroke-width="7"/><circle cx="160" cy="60" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="5"/><circle cx="163" cy="62" r="7" fill="#2b1b3d"/><circle cx="166" cy="58" r="2.5" fill="#fff"/><circle cx="140" cy="86" r="8" fill="#ff4f8b" opacity=".55"/><path d="M160 86 q8 9 17 0" fill="none" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round"/></svg>`;
+  }
+  const LINES = {
+    empty: ['Nothing on the list. Either you’re very organised or the fridge is empty.', 'Empty list. Suspicious. What did you all eat today?', 'All clear. I’ll be here, being a shrimp.'],
+    some: ['{n} things. Easy peasy.', '{n} things on the list. I’d push the trolley but, well, no hands.', '{n} things. I’ve got my eye on them. Both eyes, actually.'],
+    shop: ['{got} down, {left} to go.', '{got} in the trolley. Keep swimming.', '{left} left. It’s always the last one that hides.'],
+    done: ['All got! The trolley clears itself later, or tap Clear trolley.', 'Trolley full, list empty. Shrimply the best.'],
+    offline: ['No signal? No problem. I’m writing it all down.', 'Your ticks are safe with me. They’ll swim over when you’re back online.'],
+    usuals: ['Tap tap tap, done.', 'The usual suspects.', 'Restocking? I love a restock.'],
+    nousuals: ['Nothing here yet. Everything you add to the list turns up here, most-bought first.'],
+    poke: ['Oi. That tickles.', 'I’m a shrimp, not a button.', 'Boop received.'],
+  };
+  try {
+    const more = window.SHRIMP_LINES;
+    if (more && typeof more === 'object') Object.keys(LINES).forEach((k) => { if (Array.isArray(more[k])) LINES[k] = LINES[k].concat(more[k].filter((s) => typeof s === 'string' && s.trim())); });
+  } catch (e) {}
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const fill = (s, v) => s.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
+
+  /* =====================================================================
+     UI
+     ===================================================================== */
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  document.querySelectorAll('[data-shrimp]').forEach((el) => { el.outerHTML = shrimpSvg(+el.getAttribute('data-shrimp')); });
+  const ui = { mood: '', line: '', uline: '', toastT: null, toastId: null, sure: {}, tidy: false, find: '', lastTree: {}, joinFrom: null };
+
+  function route() {
+    const h = (location.hash || '').replace(/^#\/?/, '');
+    const [r, arg] = h.split('/');
+    return { r: r || '', arg: arg || '' };
+  }
+  const go = (h, replace) => { const u = location.pathname + location.search + (h ? '#/' + h : ''); if (replace) history.replaceState(null, '', u); else history.pushState(null, '', u); render(); };
+  const back = () => { if (history.length > 1 && ui.pushed) { ui.pushed--; history.back(); } else go('', true); };
+  function nav(h) { ui.pushed = (ui.pushed || 0) + 1; go(h); }
+  window.addEventListener('popstate', () => { if (ui.pushed) ui.pushed--; render(); });
+
+  function show(id) { ['vWelcome', 'vJoin', 'vList', 'vUsuals'].forEach((v) => $('#' + v).classList.toggle('hide', v !== id)); }
+
+  function render() {
+    const { r, arg } = route();
+    if (!sync.code) {
+      closeSheet();
+      if (r === 'join') { show('vJoin'); $('#jSwap').classList.add('hide'); } else show('vWelcome');
+      return;
+    }
+    if (r === 'join') { show('vJoin'); $('#jSwap').classList.remove('hide'); closeSheet(); return; }
+    const tree = view(); ui.lastTree = tree;
+    if (r === 'usuals') { show('vUsuals'); renderUsuals(tree); closeSheet(); return; }
+    show('vList'); renderList(tree);
+    if (r === 'edit') { const it = itemsOf(tree).find((x) => x.id === arg); if (it) openEdit(it, tree); else { closeSheet(); go('', true); } }
+    else if (r === 'share') openShare();
+    else closeSheet();
+  }
+
+  /* --- status pill and banners --- */
+  function renderPill() {
+    const p = $('#pill'), n = sync.queue.length, s = sync.status;
+    let cls = 'wait', t = 'Connecting…';
+    if (s === 'demo') { cls = 'demo'; t = 'Demo mode · this browser only'; }
+    else if (s === 'denied') { cls = 'no'; t = 'Firebase said no'; }
+    else if (s === 'offline') { cls = 'off'; t = n ? 'No signal · ' + n + (n === 1 ? ' change' : ' changes') + ' waiting' : 'No signal'; }
+    else if (s === 'online') { cls = n ? 'wait' : 'on'; t = n ? 'Syncing…' : 'Synced'; }
+    else if (n) t = 'Connecting… · ' + n + ' waiting';
+    p.className = 'pill ' + cls; $('span', p).textContent = t;
+    $('#offBan').classList.toggle('hide', s !== 'offline');
+    $('#denyBan').classList.toggle('hide', s !== 'denied');
+    $('#noStore').classList.toggle('hide', storeOk);
+  }
+
+  /* --- the list --- */
+  const tickSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b1b3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  function rowHtml(x) {
+    const got = x.s === 'got';
+    return `<div class="row${got ? ' got' : ''}" data-id="${esc(x.id)}">` +
+      `<button type="button" class="tick${got ? ' on' : ''}" data-tick="${esc(x.id)}" aria-pressed="${got}" aria-label="${got ? 'Put back on the list: ' : 'Got it: '}${esc(x.n)}"><b>${got ? tickSvg : ''}</b></button>` +
+      `<button type="button" class="nm" data-edit="${esc(x.id)}" aria-label="Edit ${esc(x.n)}${x.q ? ', ' + esc(x.q) : ''}"><span>${esc(x.n)}</span><em>${esc(x.q || '')}</em></button></div>`;
+  }
+  function renderList(tree) {
+    renderPill();
+    const all = itemsOf(tree), need = all.filter((x) => x.s === 'need').sort(byAisle);
+    const got = all.filter((x) => x.s === 'got').sort((a, b) => (a.g || 0) - (b.g || 0) || byAisle(a, b));
+    let h = '', last = '';
+    need.forEach((x) => {
+      if (x.a !== last) { last = x.a; h += `<h2 class="sec" style="background:${AISLE[x.a].col}">${esc(AISLE[x.a].name)}</h2>`; }
+      h += rowHtml(x);
+    });
+    if (!need.length && !got.length) h += '<p class="empty">Type something below, or tap <b>Usuals</b> to restock.</p>';
+    if (got.length) {
+      const sure = ui.sure.clear && ui.sure.clear > Date.now();
+      h += `<div class="trolhead"><h2 class="sec">In the trolley · ${got.length}</h2><span class="gap"></span><button type="button" class="btn small${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button></div>`;
+      got.forEach((x) => { h += rowHtml(x); });
+    }
+    const box = $('#items'), y = window.scrollY;
+    if (box.innerHTML !== h) { box.innerHTML = h; window.scrollTo(0, y); }
+    // what the Shrimp says
+    let mood = 'some';
+    if (sync.status === 'offline') mood = 'offline';
+    else if (!need.length && got.length) mood = 'done';
+    else if (!need.length) mood = 'empty';
+    else if (got.length) mood = 'shop';
+    if (mood !== ui.mood || !ui.line) { ui.mood = mood; ui.line = pick(LINES[mood]); }
+    $('#say').textContent = fill(ui.line, { n: need.length, got: got.length, left: need.length });
+  }
+
+  /* --- the usuals --- */
+  function renderUsuals(tree) {
+    const us = usualsOf(tree), onList = {};
+    itemsOf(tree).forEach((x) => { if (x.s === 'need') onList[keyOf(x.n)] = x.id; });
+    const f = ui.find.trim().toLowerCase();
+    const shown = f ? us.filter((u) => u.n.toLowerCase().includes(f)) : us;
+    let h = '';
+    AK.forEach((a) => {
+      const g = shown.filter((u) => u.a === a);
+      if (!g.length) return;
+      h += `<h2 class="sec" style="background:${AISLE[a].col}">${esc(AISLE[a].name)}</h2><div class="wrap">`;
+      g.forEach((u) => {
+        const on = !!onList[u.k];
+        if (ui.tidy) h += `<button type="button" class="chip" data-forget="${esc(u.k)}" aria-label="Forget ${esc(u.n)}"><span class="x" aria-hidden="true">✕</span>${esc(u.n)}</button>`;
+        else h += `<button type="button" class="chip" data-usual="${esc(u.k)}" aria-pressed="${on}" style="${on ? 'background:' + AISLE[a].col : ''}">${on ? tickSvg.replace('width="18" height="18"', 'width="16" height="16"') : ''}${esc(u.n)}</button>`;
+      });
+      h += '</div>';
+    });
+    if (f && !us.some((u) => u.n.toLowerCase() === f)) h += `<div style="margin-top:16px"><button type="button" class="btn sun small" id="uAddNew">Add “${esc(tidyName(ui.find))}” to the list</button></div>`;
+    if (!us.length) h += '<p class="empty">Nothing here yet.</p>';
+    const box = $('#ulist'); if (box.innerHTML !== h) box.innerHTML = h;
+    const n = Object.keys(onList).length;
+    $('#uDone').textContent = n ? 'Done · ' + n + ' on the list' : 'Done';
+    $('#uTidy').textContent = ui.tidy ? 'Finished tidying' : 'Tidy up';
+    $('#uTidy').setAttribute('aria-pressed', String(ui.tidy));
+    $('#uHint').textContent = ui.tidy ? 'Tap anything you never buy (or spelt wrong) to forget it. It comes back if you add it again.' : 'Everything the house has bought, most-bought first. Tap to pop it on the list, tap again to take it off.';
+    if (!ui.uline) ui.uline = pick(us.length ? LINES.usuals : LINES.nousuals);
+    if (!us.length) ui.uline = LINES.nousuals[0];
+    $('#uSay').textContent = ui.uline;
+  }
+
+  /* --- sheets: edit an item, share the list --- */
+  let sheetFor = '';
+  function openSheet(kind, html, label) {
+    const s = $('#sheet'), p = $('#panel');
+    if (sheetFor !== kind) { p.innerHTML = html; sheetFor = kind; p.setAttribute('aria-label', label); s.classList.remove('hide'); const f = p.querySelector('[data-autofocus]'); (f || p.querySelector('button')).focus({ preventScroll: true }); }
+  }
+  function closeSheet() { if (!sheetFor) return; sheetFor = ''; $('#sheet').classList.add('hide'); $('#panel').innerHTML = ''; }
+  const closeX = '<button type="button" class="iconbtn" data-close aria-label="Close" style="width:44px;height:44px;box-shadow:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
+
+  function openEdit(it, tree) {
+    const kind = 'edit:' + it.id;
+    if (sheetFor === kind) return;
+    const chips = AISLES.map(([k, n, c]) => `<button type="button" class="chip" data-aisle="${k}" aria-pressed="${k === it.a}" style="${k === it.a ? 'background:' + c : ''}">${k === it.a ? tickSvg.replace('width="18" height="18"', 'width="16" height="16"') : `<i style="background:${c}"></i>`}${esc(n)}</button>`).join('');
+    openSheet(kind, `<div class="grab" aria-hidden="true"></div><div class="ph"><h2>Edit item</h2>${closeX}</div>
+      <div><label class="lb" for="eN">What</label><input id="eN" class="field" maxlength="60" value="${esc(it.n)}" autocomplete="off"></div>
+      <div><label class="lb" for="eQ">How many, or a note</label><input id="eQ" class="field" maxlength="40" value="${esc(it.q || '')}" placeholder="e.g. 4 pints, the barista one" autocomplete="off"></div>
+      <div><span class="lb" id="eAl">Aisle</span><div class="achips" role="group" aria-labelledby="eAl" data-sel="${it.a}">${chips}</div><p class="note" style="margin-top:8px">The Shrimp remembers this, so ${esc(it.n.toLowerCase())} lands here next time too.</p></div>
+      <div class="two"><button type="button" class="btn rm" id="eRm">Remove</button><button type="button" class="btn green big" id="eSave" data-id="${esc(it.id)}">Save</button></div>
+      <p class="credit">A Bouncy Production · Made for Haz</p>`, 'Edit ' + it.n);
+  }
+  function shareLink() { return location.origin + location.pathname + '?join=' + sync.code; }
+  function openShare() {
+    if (sheetFor === 'share') return;
+    const cols = ['#ffd23f', '#6ec1ff', '#7ed957', '#ff8fa3', '#c79bff', '#ffb38a'];
+    let qr = '';
+    try { const q = window.qrcode(0, 'M'); q.addData(shareLink()); q.make(); qr = q.createSvgTag({ scalable: true, margin: 1 }); } catch (e) { qr = ''; }
+    openSheet('share', `<div class="grab" aria-hidden="true"></div><div class="ph"><h2>Bring the house in</h2>${closeX}</div>
+      <p class="note" style="font-size:15px;font-weight:700;text-align:center">Scan this on their phone, or type the code into Shrimply.</p>
+      ${qr ? `<div class="qr" role="img" aria-label="QR code that opens this list">${qr}</div>` : ''}
+      <div class="code" aria-label="List code ${sync.code.split('').join(' ')}">${sync.code.split('').map((ch, i) => `<span style="background:${cols[i]}" aria-hidden="true">${ch}</span>`).join('')}</div>
+      <button type="button" class="btn coral" id="bCopy" style="align-self:center" data-autofocus>Copy invite link</button>
+      <p class="linkout hide" id="linkOut"></p>
+      <div class="warnbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b1b3d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Anyone with this code can see and change the list. No passwords, so only share it with the house.</span></div>
+      ${sync.tx && sync.tx.demo ? '<p class="note" style="text-align:center">Demo mode: the code only works in other tabs of this browser until a Firebase address goes in sync-config.js.</p>' : ''}
+      <button type="button" class="link" id="bLeave">Leave this list on this phone</button>
+      <p class="credit">A Bouncy Production · Made for Haz</p>`, 'Share this list');
+  }
+
+  /* --- toast --- */
+  function toast(html, id) {
+    const t = $('#toast');
+    $('#toastT').innerHTML = html; ui.toastId = id || null;
+    $('#toastB').classList.toggle('hide', !id);
+    t.classList.remove('hide');
+    clearTimeout(ui.toastT); ui.toastT = setTimeout(() => t.classList.add('hide'), 5000);
+  }
+
+  /* =====================================================================
+     ACTIONS
+     ===================================================================== */
+  function addText(raw) {
+    const r = W.add(view(), raw, Date.now());
+    if (!r) return;
+    if (r.dupe) {
+      toast(`${esc(r.item.n)}’s already on the list.`);
+      const row = $(`.row[data-id="${CSS.escape(r.item.id)}"]`);
+      if (row) { row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash'); row.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      return;
+    }
+    write(r.ops);
+    toast(`${esc(r.item.n)} swam into <b>${esc(AISLE[r.item.a].name)}</b>`, r.item.id);
+  }
+  function tick(id) {
+    const x = itemsOf(view()).find((i) => i.id === id);
+    if (!x) return;
+    write(W.tick(view(), id, x.s !== 'got', Date.now()));
+    const b = $(`[data-tick="${CSS.escape(id)}"]`); if (b) { b.classList.add('pop'); }
+    try { navigator.vibrate && navigator.vibrate(12); } catch (e) {}
+  }
+  function autoClear() {
+    if (!sync.code) return;
+    const stale = staleTrolley(itemsOf(view()), Date.now());
+    if (stale.length) write(W.clear(stale));
+  }
+  function startList() {
+    const code = newCode();
+    connect(code, true);
+    write([{ m: 'PUT', p: 'made', b: TS }]);
+    go('', true);
+  }
+  async function joinList() {
+    const code = $('#jCode').value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    const err = $('#jErr');
+    if (!CODE_RE.test(code)) { err.textContent = code.length < 6 ? 'That’s ' + code.length + ' of 6 characters.' : 'Codes don’t use 0, O, 1, I or L. Check it again?'; return; }
+    if (code === sync.code) { go('', true); return; }
+    err.textContent = 'Checking…';
+    try {
+      const ok = await listExists(code);
+      if (!ok) { err.textContent = 'No list with that code. Check it with whoever shared it.'; return; }
+    } catch (e) {
+      err.textContent = e.denied ? 'Firebase said no. The database rules may not be published yet.' : 'Can’t check the code without signal. Try again when you’re online.';
+      return;
+    }
+    err.textContent = '';
+    connect(code, true);
+    ui.pushed = 0; go('', true);
+  }
+  function leave() {
+    disconnect();
+    try { localStorage.removeItem(STORE); } catch (e) {}
+    ui.pushed = 0; go('', true);
+  }
+
+  /* --- wiring --- */
+  $('#bStart').addEventListener('click', startList);
+  $('#bJoin').addEventListener('click', () => { $('#jErr').textContent = ''; nav('join'); setTimeout(() => $('#jCode').focus(), 50); });
+  $('#jBack').addEventListener('click', back);
+  $('#jGo').addEventListener('click', joinList);
+  $('#jCode').addEventListener('keydown', (e) => { if (e.key === 'Enter') joinList(); });
+  $('#jCode').addEventListener('input', (e) => { const v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); if (v !== e.target.value) e.target.value = v; $('#jErr').textContent = ''; });
+  $('#addF').addEventListener('submit', (e) => { e.preventDefault(); const i = $('#addI'); addText(i.value); i.value = ''; i.focus(); });
+  $('#toastB').addEventListener('click', () => { if (ui.toastId) { $('#toast').classList.add('hide'); nav('edit/' + ui.toastId); } });
+  $('#bShare').addEventListener('click', () => nav('share'));
+  $('#bUsuals').addEventListener('click', () => { ui.uline = ''; ui.tidy = false; ui.find = ''; $('#uFind').value = ''; nav('usuals'); window.scrollTo(0, 0); });
+  $('#uBack').addEventListener('click', back);
+  $('#uDone').addEventListener('click', back);
+  $('#uTidy').addEventListener('click', () => { ui.tidy = !ui.tidy; render(); });
+  $('#uFind').addEventListener('input', (e) => { ui.find = e.target.value; render(); });
+  $('#uFind').addEventListener('keydown', (e) => { if (e.key === 'Enter') { const b = $('#uAddNew'); if (b) b.click(); } });
+  $('#items').addEventListener('click', (e) => {
+    const t = e.target.closest('[data-tick]'); if (t) return tick(t.getAttribute('data-tick'));
+    const ed = e.target.closest('[data-edit]'); if (ed) return nav('edit/' + ed.getAttribute('data-edit'));
+    if (e.target.closest('#bClear')) {
+      if (ui.sure.clear && ui.sure.clear > Date.now()) { ui.sure.clear = 0; write(W.clear(itemsOf(view()).filter((x) => x.s === 'got'))); toast('Trolley cleared. Nice shop!'); }
+      else { ui.sure.clear = Date.now() + 3000; render(); setTimeout(render, 3100); }
+    }
+  });
+  $('#ulist').addEventListener('click', (e) => {
+    const c = e.target.closest('[data-usual]');
+    if (c) {
+      const k = c.getAttribute('data-usual'), tree = view();
+      const on = itemsOf(tree).filter((x) => x.s === 'need' && keyOf(x.n) === k);
+      if (on.length) write(W.remove(on[on.length - 1].id));
+      else { const u = usualsOf(tree).find((x) => x.k === k); if (u) { const r = W.add(tree, { n: u.n, a: u.a }, Date.now()); if (r && !r.dupe) write(r.ops); } }
+      return;
+    }
+    const f = e.target.closest('[data-forget]'); if (f) return write(W.forget(f.getAttribute('data-forget')));
+    if (e.target.closest('#uAddNew')) { addText(ui.find); ui.find = ''; $('#uFind').value = ''; render(); }
+  });
+  $('#sheetBack').addEventListener('click', back);
+  $('#panel').addEventListener('click', (e) => {
+    if (e.target.closest('[data-close]')) return back();
+    const a = e.target.closest('[data-aisle]');
+    if (a) {
+      const k = a.getAttribute('data-aisle'), box = a.parentNode; box.setAttribute('data-sel', k);
+      $$('[data-aisle]', box).forEach((b) => { const kk = b.getAttribute('data-aisle'), on = kk === k; b.setAttribute('aria-pressed', String(on)); b.style.background = on ? AISLE[kk].col : ''; b.innerHTML = (on ? tickSvg.replace('width="18" height="18"', 'width="16" height="16"') : `<i style="background:${AISLE[kk].col}"></i>`) + esc(AISLE[kk].name); });
+      return;
+    }
+    if (e.target.closest('#eSave')) {
+      const id = $('#eSave').getAttribute('data-id');
+      write(W.edit(view(), id, { n: $('#eN').value, q: $('#eQ').value, a: $('.achips').getAttribute('data-sel') }));
+      return back();
+    }
+    const rm = e.target.closest('#eRm');
+    if (rm) {
+      if (rm.dataset.sure === '1') { write(W.remove($('#eSave').getAttribute('data-id'))); return back(); }
+      rm.dataset.sure = '1'; rm.textContent = 'Sure?'; rm.classList.add('sure');
+      setTimeout(() => { if (rm.isConnected) { rm.dataset.sure = ''; rm.textContent = 'Remove'; rm.classList.remove('sure'); } }, 3000);
+      return;
+    }
+    if (e.target.closest('#bCopy')) {
+      const link = shareLink(), out = $('#linkOut');
+      const done = () => { $('#bCopy').textContent = 'Copied!'; setTimeout(() => { const b = $('#bCopy'); if (b) b.textContent = 'Copy invite link'; }, 2000); };
+      const fail = () => { out.textContent = link; out.classList.remove('hide'); };
+      try { navigator.clipboard.writeText(link).then(done, fail); } catch (er) { fail(); }
+      return;
+    }
+    const lv = e.target.closest('#bLeave');
+    if (lv) {
+      if (lv.dataset.sure === '1') return leave();
+      lv.dataset.sure = '1'; lv.textContent = sync.queue.length ? 'Sure? ' + sync.queue.length + ' unsent changes will be lost' : 'Sure? Tap again to leave';
+      setTimeout(() => { if (lv.isConnected) { lv.dataset.sure = ''; lv.textContent = 'Leave this list on this phone'; } }, 3000);
+    }
+  });
+  $('#panel').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.matches('#eN,#eQ')) { e.preventDefault(); $('#eSave').click(); } });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sheetFor) back(); });
+  $$('[data-wig]').forEach((b) => b.addEventListener('click', () => {
+    const s = $('svg', b); if (s) { s.classList.remove('wig'); void s.getBBox(); s.classList.add('wig'); }
+    if (b.closest('#vList')) { ui.line = pick(LINES.poke); $('#say').textContent = ui.line; }
+  }));
+
+  sync.onChange = (why) => { if (why === 'status' || why === 'queue') renderPill(); if (why !== 'status' || route().r !== 'usuals') render(); };
+  setInterval(autoClear, 60000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { autoClear(); if (sync.tx) { sync.tx.reopen(); flush(); } } });
+
+  /* --- start up --- */
+  (function boot() {
+    const st = load();
+    if (st.code && CODE_RE.test(st.code)) connect(st.code, false);
+    const q = new URLSearchParams(location.search), j = (q.get('join') || '').toUpperCase();
+    if (j) {
+      history.replaceState(null, '', location.pathname + '#/join');
+      $('#jCode').value = j.replace(/[^A-Z0-9]/g, '').slice(0, 6);
+      if (j === sync.code) history.replaceState(null, '', location.pathname);
+      else if (!sync.code && CODE_RE.test(j)) { render(); joinList(); return; }
+    }
+    render(); autoClear();
+  })();
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => {});
+
+  // for tests
+  window.__shrimply = { sync, view, W, guessAisle, parseAdd, keyOf, itemsOf, usualsOf, staleTrolley, applyOp, AUTO_CLEAR_MS, autoClear, ui };
+})();
+</script>
+</body>
+</html>
