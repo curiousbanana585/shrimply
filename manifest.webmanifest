@@ -1,7 +1,8 @@
 {
+ "id": "./?app=shrimply",
  "name": "Shrimply",
  "short_name": "Shrimply",
- "description": "One shopping list for the whole house, with The Shrimp. A Bouncy Production · Made for Haz.",
+ "description": "One shopping list for the whole house, with The Shrimp. A Bouncy Production \u00b7 Made for Haz.",
  "start_url": "./index.html",
  "scope": "./",
  "display": "standalone",
@@ -9,8 +10,23 @@
  "background_color": "#fff7e8",
  "theme_color": "#ffd23f",
  "icons": [
-  { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-  { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-  { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
  ]
 }
