@@ -1,5 +1,5 @@
 // Caches the app so it opens in a shop with no signal. Bump VERSION when you update index.html.
-const VERSION = 'shrimply-v4';
+const VERSION = 'shrimply-v5';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
 const OPTIONAL = ['./shrimp-messages.js', './sync-config.js'];   // missing is fine
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(VERSION).then((c) => c.addAll(FILES).then(() => Promise.all(OPTIONAL.map((u) => c.add(u).catch(() => {}))))).then(() => self.skipWaiting())); });

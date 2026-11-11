@@ -128,6 +128,17 @@ button{cursor:pointer}
 .toast{position:absolute;left:16px;right:16px;bottom:calc(100% + 10px);background:var(--ink);color:#fff;border-radius:16px;padding:8px 8px 8px 14px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:52px;pointer-events:auto}
 .toast span{flex-grow:1}
 .toast b{color:#8fd0ff}
+.step{display:flex;align-items:center;gap:10px}
+.step .iconbtn{width:48px;height:48px;font-size:26px;font-weight:800;line-height:1}
+.step output{min-width:44px;text-align:center;font-family:var(--head);font-size:24px;font-weight:700}
+.step .iconbtn:disabled{opacity:.4}
+.serve{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--stripe2);border:3px solid var(--ink);border-radius:16px;padding:6px 6px 6px 14px}
+.serve b{font-size:16px;font-weight:800}
+.serve small{display:block;font-size:12.5px;font-weight:700;color:var(--muted)}
+.toast.duo{flex-wrap:wrap;padding:10px}
+.toast.duo span{flex:0 0 100%}
+.toast.duo button{flex:1 1 0;white-space:normal;line-height:1.15;padding:4px 10px}
+.toast button.alt{background:transparent;color:#fff;border:2px solid #fff}
 .toast button{white-space:nowrap;min-height:40px;padding:0 12px;border-radius:12px;border:none;background:var(--sun);color:var(--ink);font-size:14px;font-weight:800}
 
 /* usuals */
@@ -167,6 +178,48 @@ button{cursor:pointer}
 .link{border:none;background:none;color:var(--warn);font-size:15px;font-weight:800;text-decoration:underline;min-height:48px;align-self:center;padding:0 12px}
 .linkout{font-size:13px;word-break:break-all;color:var(--muted);text-align:center;margin:0}
 
+/* who added it, and the trolley */
+.row{grid-template-columns:44px minmax(0,1fr) auto}
+.who{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:800;color:var(--muted);padding-left:8px;max-width:110px}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:2.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;font-family:var(--head);font-size:14px;font-weight:700;color:var(--ink);box-sizing:border-box;line-height:1}
+.face.plain{background:var(--green)}
+.track{display:block;width:100%;margin:14px 0 2px;background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:10px 12px 12px;box-shadow:0 3px 0 var(--ink);text-align:left;color:var(--ink);font-family:var(--body)}
+.track .tl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.track .tl b{font-family:var(--head);font-size:16px;font-weight:600}
+.track .tl small{font-size:12.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.rail{display:block;position:relative;height:36px;margin-top:4px}
+.rail::before,.rail i{content:"";position:absolute;left:0;top:22px;height:10px;border-radius:5px;border:2.5px solid var(--ink);box-sizing:border-box}
+.rail::before{right:0;height:14px;background:repeating-linear-gradient(90deg,var(--stripe1) 0 10px,var(--stripe2) 10px 20px)}
+.rail i{height:14px;background:var(--green);min-width:14px;transition:width .5s ease}
+.rail svg{position:absolute;top:-4px;transition:left .5s ease}
+.cart{position:relative;margin-top:14px;padding-left:26px}
+.cart .handle{position:absolute;left:0;top:-6px}
+.basket{background:repeating-linear-gradient(0deg,var(--stripe1) 0 14px,var(--sun) 14px 17px);border:3.5px solid var(--ink);border-radius:10px 10px 34px 34px;box-shadow:0 4px 0 var(--ink);padding:14px 10px 22px;display:flex;flex-wrap:wrap;gap:9px 8px;justify-content:center}
+.stick{transform:rotate(var(--r));display:inline-flex;align-items:center;gap:6px;min-height:44px;max-width:100%;padding:0 12px 0 5px;border:2.5px solid var(--ink);border-radius:22px;background:var(--paper);font-family:var(--body);font-size:15px;font-weight:800;color:var(--ink);box-shadow:0 2px 0 var(--ink);text-align:left}
+.stick span{overflow-wrap:anywhere}
+.stick .face{width:28px;height:28px}
+.stick.drop{animation:drop .5s cubic-bezier(.3,1.5,.6,1)}
+@keyframes drop{0%{transform:translateY(-40px) rotate(0) scale(.6);opacity:0}100%{transform:rotate(var(--r));opacity:1}}
+.stick.pop{animation:pop .3s ease}
+.wheels{display:flex;justify-content:space-between;padding:0 40px;margin-top:-6px}
+.wheels i{width:26px;height:26px;border-radius:50%;border:3.5px solid var(--ink);background:var(--paper);box-sizing:border-box}
+.cartnote{text-align:center;margin-top:10px}
+.allgot{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:18px;text-align:center}
+.allgot .bigcart{max-width:100%;height:auto}
+.allgot h2{margin:0;font-family:var(--head);font-size:32px;font-weight:700}
+.allgot .tally{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.allgot .tally span{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px 0 5px;border:2.5px solid var(--ink);border-radius:20px;background:var(--paper);font-size:14px;font-weight:800}
+.allgot .tally .face{width:28px;height:28px}
+.allgot .btn.big{padding:0 26px}
+.allgot .link{color:var(--muted)}
+.conf i{position:absolute;width:12px;height:12px;border-radius:50%;border:2.5px solid var(--ink);animation:conf .7s cubic-bezier(.3,1.6,.6,1) both}
+.conf i:nth-child(1){left:6%;top:30px;background:#ff8fa3}
+.conf i:nth-child(2){right:8%;top:46px;border-radius:3px;transform:rotate(20deg);background:var(--sky);animation-delay:.08s}
+.conf i:nth-child(3){left:14%;top:196px;width:10px;height:10px;background:var(--green);animation-delay:.16s}
+.conf i:nth-child(4){right:12%;top:208px;border-radius:3px;background:#c79bff;animation-delay:.24s}
+.conf i:nth-child(5){left:50%;top:6px;width:10px;height:10px;background:var(--sun);animation-delay:.12s}
+@keyframes conf{0%{transform:scale(0)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* narrow phones go last so base rules don't win */
 @media (max-width:370px){
@@ -177,6 +230,8 @@ button{cursor:pointer}
   .sharebtn{padding:0 10px}
   .say .btn{padding:0 9px;font-size:15px}
   .say .btn svg{display:none}
+  .who span{display:none}
+  .wheels{padding:0 28px}
 }
 </style>
 </head>
@@ -238,7 +293,7 @@ button{cursor:pointer}
     <div class="tip hide" id="tip" role="note"></div>
     <div class="items" id="items"></div>
     <div class="addbar"><div style="position:relative">
-      <div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB" class="hide">Change</button></div>
+      <div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB2" class="alt hide"></button><button type="button" id="toastB" class="hide">Change</button></div>
       <form class="addrow" id="addF" autocomplete="off">
         <label for="addI" class="sr">Add an item</label>
         <input id="addI" class="field" placeholder="Add something…" maxlength="70" enterkeyhint="done">
@@ -284,6 +339,8 @@ button{cursor:pointer}
     </header>
     <div class="kitedit">
       <div><label class="lb" for="keN">Kit name</label><input id="keN" class="field" maxlength="40" placeholder="e.g. Taco night" autocomplete="off"></div>
+      <div><span class="lb" id="keSl">Serves</span><div class="step" role="group" aria-labelledby="keSl"><button type="button" class="iconbtn" id="keSm" aria-label="Serves fewer">−</button><output id="keSv" aria-live="polite">–</output><button type="button" class="iconbtn" id="keSp" aria-label="Serves more">+</button></div>
+        <p class="note" style="margin-top:6px" id="keSn">Only for recipes. Set it and you can cook for more (or fewer) when you add the kit.</p></div>
       <div><label class="lb" for="keI">Add things</label>
         <form class="kadd" id="keF" autocomplete="off"><textarea id="keI" class="field" rows="1" maxlength="2000" placeholder="e.g. 500g mince" enterkeyhint="done"></textarea><button type="submit" class="btn green" style="min-height:52px;box-shadow:0 3px 0 var(--ink)">Add</button></form>
         <p class="note" style="margin-top:6px">Got a recipe? Paste its ingredients in one go and I’ll split them up.</p>
@@ -397,6 +454,73 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const parts = /\n/.test(t.trim()) ? t.split(/\n+/).map((l) => l.replace(/\s*[,(].*$/, '')) : t.split(/[,;]/);
     return parts.map((x) => x.trim()).filter(Boolean).slice(0, 60);
   };
+  // the add box: "2 lemons" / "eggs x12" / "6 x eggs" as before, and now "500g mince" or "2 tins of tomatoes" too
+  const parseTyped = (raw) => (/^\s*\d{1,3}\s*[x×]\s|[x×]\s*\d{1,3}\s*$/i.test(String(raw || '')) ? parseAdd(raw) : parseLine(raw));
+
+  /* --- amounts: adding two together, and scaling a recipe. Anything we can't read is left alone. --- */
+  const FRAC = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 1 / 3, '⅔': 2 / 3 };
+  const UNIT_OF = {   // spelling → [family, size in the family's base, how to write it]
+    g: ['g', 1, 'g'], kg: ['g', 1000, 'kg'], mg: ['g', 0.001, 'mg'],
+    ml: ['ml', 1, 'ml'], cl: ['ml', 10, 'cl'], l: ['ml', 1000, 'l'], ltr: ['ml', 1000, 'l'], litre: ['ml', 1000, 'l'], liter: ['ml', 1000, 'l'],
+    oz: ['oz', 1, 'oz'], lb: ['lb', 1, 'lb'], tsp: ['tsp', 1, 'tsp'], teaspoon: ['tsp', 1, 'tsp'], tbsp: ['tbsp', 1, 'tbsp'], tablespoon: ['tbsp', 1, 'tbsp'],
+  };
+  const SPOONY = /^(tsp|tbsp|cup|pinch|handful)$/;            // these read nicer as ½ and ¼ than 0.5
+  function unitWord(u) {   // "Tins" → tin, "bunches" → bunch, "kg" → kg
+    u = String(u || '').toLowerCase().replace(/\.$/, '');
+    if (UNIT_OF[u]) return u;
+    if (/(ch|sh)es$/.test(u)) u = u.slice(0, -2); else if (/[^s]s$/.test(u) && u.length > 2) u = u.slice(0, -1);
+    return u;
+  }
+  function parseQty(q) {   // "×4" → {v:4,u:''}, "200g" → {v:200,u:'g'}, "1½ tbsp" → {v:1.5,u:'tbsp'}, "the barista one" → null
+    const m = String(q || '').trim().match(/^[x×]?\s*(\d+(?:[.,]\d+)?(?:\s*[½¼¾⅓⅔])?|\d+\s*\/\s*\d+|\d+\s+\d+\s*\/\s*\d+|[½¼¾⅓⅔])\s*([a-z]+\.?)?$/i);
+    if (!m) return null;
+    let s = m[1].replace(',', '.').replace(/\s+/g, ' '), v = 0;
+    const mixed = s.match(/^(\d+) (\d+)\s?\/\s?(\d+)$/), fr = s.match(/^(\d+)\s?\/\s?(\d+)$/), uni = s.match(/^(\d+(?:\.\d+)?)?\s?([½¼¾⅓⅔])$/);
+    if (mixed) v = +mixed[1] + mixed[2] / mixed[3];
+    else if (fr) v = fr[1] / fr[2];
+    else if (uni) v = (+uni[1] || 0) + FRAC[uni[2]];
+    else v = +s;
+    if (!isFinite(v) || v <= 0) return null;
+    return { v, u: unitWord(m[2] || '') };
+  }
+  function numText(v, quarters) {
+    if (quarters) {
+      const r = Math.round(v * 4) / 4, w = Math.floor(r), f = r - w;
+      if (r <= 0) return '¼';
+      return (w ? String(w) : '') + (f === 0.25 ? '¼' : f === 0.5 ? '½' : f === 0.75 ? '¾' : '');
+    }
+    return String(Math.round(v * 100) / 100);
+  }
+  function qtyText(v, u) {
+    if (!u) return '×' + numText(v);
+    const k = UNIT_OF[u];
+    if (k && k[0] === 'g' && k[1] === 1 && v >= 1000) return qtyText(v / 1000, 'kg');      // 1100g → 1.1kg
+    if (k && k[0] === 'ml' && k[1] === 1 && v >= 1000) return qtyText(v / 1000, 'l');
+    if (k && (k[2] === 'kg' || k[2] === 'l') && v < 1) return qtyText(Math.round(v * 1000), k[0]);   // 0.75kg → 750g
+    if (k) return numText(v, SPOONY.test(k[0])) + (/^(g|kg|mg|ml|cl|l|oz|lb)$/.test(k[2]) ? '' : ' ') + k[2];
+    const many = v > 1, word = many ? (/(ch|sh)$/.test(u) ? u + 'es' : u + 's') : u;
+    return numText(v, SPOONY.test(u)) + ' ' + word;
+  }
+  function sumQty(a, b) {  // "×12" + "×4" → "×16", "500g" + "1kg" → "1.5kg", "2 tins" + "1 tin" → "3 tins". Different kinds → null
+    const x = parseQty(a), y = parseQty(b);
+    if (!x || !y) return null;
+    const fx = UNIT_OF[x.u], fy = UNIT_OF[y.u];
+    if (fx && fy) {
+      if (fx[0] !== fy[0]) return null;
+      return qtyText((x.v * fx[1] + y.v * fy[1]) / UNIT_OF[fx[0]][1], fx[0]);
+    }
+    if (fx || fy || x.u !== y.u) return null;
+    return qtyText(x.v + y.v, x.u);
+  }
+  function scaleQty(q, f) {   // a recipe for 2 made for 4: f = 2. Things you buy whole (tins, onions) round up.
+    const x = parseQty(q);
+    if (!x || !(f > 0) || f === 1) return String(q || '');
+    let v = x.v * f;
+    const fam = UNIT_OF[x.u];
+    if (!fam && !SPOONY.test(x.u)) v = Math.ceil(v - 1e-9);                     // 1.5 tins → 2 tins, ×1.5 → ×2
+    else if (fam && (fam[0] === 'g' || fam[0] === 'ml') && fam[1] === 1) v = Math.round(v);   // grams and ml: whole numbers
+    return qtyText(v, x.u);
+  }
   const tidyWho = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 16);
   const newId = () => 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   function newCode() { let c = ''; const r = new Uint32Array(6); try { crypto.getRandomValues(r); } catch (e) { for (let i = 0; i < 6; i++) r[i] = Math.floor(Math.random() * 1e9); } for (let i = 0; i < 6; i++) c += ALPHA[r[i] % ALPHA.length]; return c; }
@@ -468,7 +592,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   /* --- the writes the app makes --- */
   const W = {
     add(tree, raw, now, by) {    // → {ops, item, dupe}. by = this phone's name (who added it)
-      const p = typeof raw === 'string' ? parseAdd(raw) : { n: tidyName(raw.n), q: String(raw.q || '').trim().slice(0, 40) };
+      const p = typeof raw === 'string' ? parseTyped(raw) : { n: tidyName(raw.n), q: String(raw.q || '').trim().slice(0, 40) };
       if (!p.n) return null;
       const k = keyOf(p.n);
       const dupe = itemsOf(tree).find((x) => x.s === 'need' && keyOf(x.n) === k);
@@ -482,7 +606,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       if (!obj(obj(tree).usual)[k]) ops.push({ m: 'PATCH', p: 'usual/' + k, b: { n: p.n, a, t: now } });
       return { ops, item: Object.assign({ id }, item), dupe: false };
     },
-    tick(tree, id, on, now) {    // ticking counts towards the usuals (and unticking takes it back)
+    tick(tree, id, on, now, by) {    // ticking counts towards the usuals (and unticking takes it back). by = who got it
       const x = itemsOf(tree).find((i) => i.id === id);
       if (!x || (x.s === 'got') === !!on) return [];
       // the count is written as a plain number, not a server increment, so a retry on a flaky
@@ -492,6 +616,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       if (x.q) body.q = x.q;
       if (x.b) body.b = x.b;
       if (on) body.g = now;
+      if (on && tidyWho(by)) body.w = tidyWho(by);
       const b = { ['items/' + id]: body, ['usual/' + k + '/c']: cnt, ['usual/' + k + '/n']: x.n, ['usual/' + k + '/a']: x.a };
       if (on) b['usual/' + k + '/t'] = now;
       return [{ m: 'PATCH', p: '', b }];
@@ -504,6 +629,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       if (q) body.q = q;
       if (x.b) body.b = x.b;
       if (x.g) body.g = x.g;
+      if (x.w) body.w = x.w;
       const ops = [{ m: 'PUT', p: 'items/' + id, b: body }];
       if (n !== x.n || a !== x.a) ops.push({ m: 'PATCH', p: 'usual/' + keyOf(n), b: { n, a } });   // remember the aisle for next time
       return ops;
@@ -516,6 +642,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const items = {};
       (kit.list || []).slice(0, 60).forEach((i, n) => { const k = keyOf(i.n); if (items[k]) return; const it = { n: tidyName(i.n), a: AISLE[i.a] ? i.a : guessAisle(i.n), o: n }; const q = String(i.q || '').trim().slice(0, 40); if (q) it.q = q; items[k] = it; });
       const b = { n: String(kit.n || '').replace(/\s+/g, ' ').trim().slice(0, 40) || 'Kit', t: kit.t || Date.now() };
+      const sv = Math.round(+kit.s);
+      if (sv >= 1 && sv <= 20) b.s = sv;          // serves: only for recipes
       if (Object.keys(items).length) b.items = items;
       return [{ m: 'PUT', p: 'kits/' + id, b }];
     },
@@ -532,10 +660,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       return { ops, added, skipped };
     },
   };
-  // the same write without who-added-it, for a database whose rules haven't been updated yet
+  // the same write without the newer fields (who added it, serves), for a database whose rules haven't been updated yet
   function withoutBy(op) {
-    const strip = (v) => { if (v && typeof v === 'object' && 'b' in v && typeof v.b === 'string') { v = Object.assign({}, v); delete v.b; } return v; };
-    if (op.m === 'PUT' && /^items\//.test(op.p) && op.b && 'b' in op.b) return Object.assign({}, op, { b: strip(op.b) });
+    // newest field first: v1.2 rules know "b" (who added it) but not "w" (who got it), v1.1 rules know neither
+    const strip = (v) => { if (v && typeof v === 'object' && (typeof v.b === 'string' || typeof v.w === 'string')) { v = Object.assign({}, v); if (typeof v.w === 'string') delete v.w; else delete v.b; } return v; };
+    if (op.m === 'PUT' && /^items\//.test(op.p) && op.b && ('b' in op.b || 'w' in op.b)) return Object.assign({}, op, { b: strip(op.b) });
+    if (op.m === 'PUT' && /^kits\//.test(op.p) && op.b && 's' in op.b) { const b = Object.assign({}, op.b); delete b.s; return Object.assign({}, op, { b }); }   // v1.2 rules: no "serves" yet
     if (op.m === 'PATCH' && op.p === '') {
       let changed = false; const b = {};
       Object.keys(obj(op.b)).forEach((k) => { const v = /^items\/[^/]+$/.test(k) ? strip(op.b[k]) : op.b[k]; if (v !== op.b[k]) changed = true; b[k] = v; });
@@ -801,27 +931,61 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   /* --- the list --- */
   const tickSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b1b3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  // everyone gets a colour from their name, so Ann is the same purple on every phone
+  const FACES = ['#c79bff', '#6ec1ff', '#ff8fa3', '#ffb38a', '#5ee0b8', '#ffc93c', '#8ee3ef'];
+  function faceCol(name) { let h = 0; const s = String(name || '').toLowerCase(); for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return FACES[h % FACES.length]; }
+  const face = (name) => `<b class="face" style="background:${faceCol(name)}" aria-hidden="true">${esc(Array.from(String(name).trim())[0] || '?').toUpperCase()}</b>`;
   function rowHtml(x) {
-    const got = x.s === 'got', nw = !got && isNew(x), by = nw && x.b ? esc(x.b) : '';
-    return `<div class="row${got ? ' got' : ''}" data-id="${esc(x.id)}">` +
-      `<button type="button" class="tick${got ? ' on' : ''}" data-tick="${esc(x.id)}" aria-pressed="${got}" aria-label="${got ? 'Put back on the list: ' : 'Got it: '}${esc(x.n)}"><b>${got ? tickSvg : ''}</b></button>` +
-      `<button type="button" class="nm" data-edit="${esc(x.id)}" aria-label="Edit ${esc(x.n)}${x.q ? ', ' + esc(x.q) : ''}${nw ? ', new' + (by ? ' from ' + by : '') : ''}"><span>${esc(x.n)}${nw ? '<i class="nw" aria-hidden="true">new</i>' : ''}${by ? '<i class="nw by" aria-hidden="true">' + by + '</i>' : ''}</span><em>${esc(x.q || '')}</em></button></div>`;
+    const nw = isNew(x), by = x.b ? esc(x.b) : '';
+    return `<div class="row" data-id="${esc(x.id)}">` +
+      `<button type="button" class="tick" data-tick="${esc(x.id)}" aria-pressed="false" aria-label="Got it: ${esc(x.n)}"><b></b></button>` +
+      `<button type="button" class="nm" data-edit="${esc(x.id)}" aria-label="Edit ${esc(x.n)}${x.q ? ', ' + esc(x.q) : ''}${nw ? ', new' : ''}${by ? ', added by ' + by : ''}"><span>${esc(x.n)}${nw ? '<i class="nw" aria-hidden="true">new</i>' : ''}</span><em>${esc(x.q || '')}</em></button>` +
+      (by ? `<span class="who" aria-hidden="true">${face(x.b)}<span>${by}</span></span>` : '<span></span>') + '</div>';
   }
+  // the trolley: everything ticked, as stickers in a basket. The face is who put it in. Tap a sticker to put it back.
+  const TILT = [-4, 3, -2, 2, -3, 4, -1, 1];
+  function basketHtml(got, clearBtn) {
+    const sure = ui.sure.clear && ui.sure.clear > Date.now();
+    let h = `<div class="trolhead" id="trol"><h2 class="sec">In the trolley · ${got.length}</h2><span class="gap"></span>` +
+      (clearBtn ? `<button type="button" class="btn small${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button>` : '') + '</div>';
+    h += '<div class="cart"><svg class="handle" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 6h10l12 14" fill="none" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="basket">';
+    got.slice().reverse().forEach((x, i) => {   // newest on top
+      let k = 0; for (const c of x.id) k = (k + c.charCodeAt(0)) % TILT.length;
+      h += `<button type="button" class="stick${x.id === ui.lastTick ? ' drop' : ''}" style="--r:${TILT[k]}deg" data-tick="${esc(x.id)}" aria-pressed="true" aria-label="Put back on the list: ${esc(x.n)}${x.w ? ', got by ' + esc(x.w) : ''}">` +
+        (x.w ? face(x.w) : `<b class="face plain" aria-hidden="true">${tickSvg.replace('width="18" height="18"', 'width="14" height="14"')}</b>`) + `<span>${esc(x.n)}${x.q ? ' · ' + esc(x.q) : ''}</span></button>`;
+    });
+    h += '</div><div class="wheels" aria-hidden="true"><i></i><i></i></div></div>';
+    h += '<p class="note cartnote">' + (got.some((x) => x.w) ? 'The face on each sticker is who put it in. ' : '') + 'Tap one to put it back on the list.</p>';
+    return h;
+  }
+  function tally(got) {   // [[name, count]] most first
+    const c = {}; got.forEach((x) => { if (x.w) c[x.w] = (c[x.w] || 0) + 1; });
+    return Object.keys(c).map((n) => [n, c[n]]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }
+  const CART_SVG = '<svg class="bigcart" width="260" height="210" viewBox="0 0 260 210" role="img" aria-label="The Shrimp riding a full trolley"><path d="M20 40h28l26 112h138l26-86H60" fill="#ffd23f" stroke="#2b1b3d" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><path d="M92 70l10 76M132 70v78M172 70l-8 78M208 70l-16 78M68 108h160" stroke="#2b1b3d" stroke-width="4" stroke-linecap="round"/><rect x="78" y="40" width="34" height="30" rx="5" fill="#6ec1ff" stroke="#2b1b3d" stroke-width="5"/><rect x="182" y="30" width="26" height="40" rx="6" fill="#7ed957" stroke="#2b1b3d" stroke-width="5"/><ellipse cx="160" cy="58" rx="22" ry="14" fill="#ffb38a" stroke="#2b1b3d" stroke-width="5"/><circle cx="80" cy="182" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><circle cx="198" cy="182" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><g transform="translate(104 -6) scale(0.42)"><path d="M150 72C172 122 124 166 74 152" fill="none" stroke="#2b1b3d" stroke-width="66" stroke-linecap="round"/><path d="M150 72C172 122 124 166 74 152" fill="none" stroke="#ff7a59" stroke-width="52" stroke-linecap="round"/><path d="M150 42C160 10 185 6 200 16M140 42C138 12 120 4 104 10" fill="none" stroke="#2b1b3d" stroke-width="7" stroke-linecap="round"/><ellipse cx="152" cy="70" rx="38" ry="34" fill="#ff7a59" stroke="#2b1b3d" stroke-width="9"/><circle cx="160" cy="60" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><circle cx="163" cy="62" r="7" fill="#2b1b3d"/><path d="M150 84q12 16 26 0" fill="#fff" stroke="#2b1b3d" stroke-width="6" stroke-linecap="round"/></g></svg>';
   function renderList(tree) {
     renderPill();
     const all = itemsOf(tree), need = all.filter((x) => x.s === 'need').sort(byAisle);
     const got = all.filter((x) => x.s === 'got').sort((a, b) => (a.g || 0) - (b.g || 0) || byAisle(a, b));
     let h = '', last = '';
+    if (need.length && got.length) {   // the trolley track fills up as things get ticked
+      const all2 = need.length + got.length, pc = Math.round((got.length / all2) * 100);
+      h += `<button type="button" class="track" id="bTrack" aria-label="In the trolley: ${got.length} of ${all2}. Show the trolley"><span class="tl"><b>In the trolley: ${got.length} of ${all2}</b><small>see them ↓</small></span>` +
+        `<span class="rail" aria-hidden="true"><i style="width:${pc}%"></i><svg style="left:calc(${pc}% - 22px)" width="40" height="34" viewBox="0 0 40 34"><path d="M2 4h6l4 18h20l4-13H10" fill="#ffd23f" stroke="#2b1b3d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle cx="14" cy="28" r="3.5" fill="#fff" stroke="#2b1b3d" stroke-width="2.5"/><circle cx="29" cy="28" r="3.5" fill="#fff" stroke="#2b1b3d" stroke-width="2.5"/></svg></span></button>`;
+    }
     need.forEach((x) => {
       if (x.a !== last) { last = x.a; h += `<h2 class="sec" style="background:${AISLE[x.a].col}">${esc(AISLE[x.a].name)}</h2>`; }
       h += rowHtml(x);
     });
     if (!need.length && !got.length) h += '<p class="empty">Type something below, or tap <b>Usuals</b> to restock.</p>';
-    if (got.length) {
+    if (!need.length && got.length) {   // all got: the big moment
       const sure = ui.sure.clear && ui.sure.clear > Date.now();
-      h += `<div class="trolhead"><h2 class="sec">In the trolley · ${got.length}</h2><span class="gap"></span><button type="button" class="btn small${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button></div>`;
-      got.forEach((x) => { h += rowHtml(x); });
-    }
+      h += `<div class="allgot"><span class="conf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>${CART_SVG}<h2>All got!</h2>` +
+        `<div class="tally">${tally(got).map(([n, c]) => `<span>${face(n)}${esc(n)} got ${c}</span>`).join('')}</div>` +
+        `<button type="button" class="btn green big${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button>` +
+        `<button type="button" class="link" id="bShowTrol" aria-expanded="${!!ui.showTrol}">${ui.showTrol ? 'Hide what’s in it' : 'Show what’s in it'}</button></div>`;
+      if (ui.showTrol) h += basketHtml(got, false);
+    } else if (got.length) h += basketHtml(got, true);
     const box = $('#items'), y = window.scrollY;
     if (box.innerHTML !== h) { box.innerHTML = h; window.scrollTo(0, y); }
     // what the Shrimp says
@@ -937,6 +1101,14 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (!k.list.length) h = '<p class="note" style="font-size:14px">Nothing in this kit yet. Add things above, one at a time or a whole recipe at once.</p>';
     const box = $('#keList'); if (box.innerHTML !== h) box.innerHTML = h;
     $('#keFill').classList.toggle('hide', !itemsOf(view()).length);
+    $('#keSv').textContent = k.s ? String(k.s) : '–';
+    $('#keSm').disabled = !k.s; $('#keSp').disabled = k.s >= 20;
+  }
+  function setServes(d) {    // – (not a recipe) → 2 → 3 … 20; going below 1 makes it a plain kit again
+    saveKitName();
+    const k = curKit(); if (!k) return;
+    const s = k.s ? k.s + d : (d > 0 ? 2 : 0);
+    write(W.kitPut(k.id, Object.assign({}, k, { s: s >= 1 ? Math.min(20, s) : 0 })));
   }
   function saveKitName() {
     clearTimeout(ui.keT);
@@ -962,11 +1134,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (ui.pushed) back(); else go('kits', true);
   }
   function home() { closeSheet(); if (ui.pushed) { const n = ui.pushed; ui.pushed = 0; history.go(-n); } else go('', true); }
+  function kitQ(q) {   // an amount as it'll go on the list: scaled when the Add sheet's "Serves" has been changed
+    const g = $('#kGo'), base = g ? +g.dataset.base : 0, now = g ? +g.dataset.serves : 0;
+    return base && now && now !== base ? scaleQty(q, now / base) : String(q || '');
+  }
   function openKitAdd(k, tree) {
     const kind = 'kitadd:' + k.id;
     if (sheetFor === kind) return;
     const onList = new Set(itemsOf(tree).filter((x) => x.s === 'need').map((x) => keyOf(x.n)));
     let rows = '', n = 0;
+    const serve = k.s ? `<div class="serve"><span><b>Serves <span id="kSv">${k.s}</span></b><small id="kSn">As written</small></span><span class="step"><button type="button" class="iconbtn" data-serve="-1" aria-label="Fewer people"${k.s <= 1 ? ' disabled' : ''}>−</button><button type="button" class="iconbtn" data-serve="1" aria-label="More people"${k.s >= 20 ? ' disabled' : ''}>+</button></span></div>` : '';
     k.list.forEach((i) => {
       if (onList.has(keyOf(i.n))) { rows += `<div class="pick off"><span class="tick" aria-hidden="true"><b></b></span><span class="nm2">${esc(i.n)}</span><em>on the list</em></div>`; return; }
       n++;
@@ -974,8 +1151,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     });
     openSheet(kind, `<div class="grab" aria-hidden="true"></div><div class="ph"><h2>${esc(k.n)}</h2>${closeX}</div>
       <p class="note" style="font-size:15px;font-weight:700;margin-top:-6px">Untick anything you’ve still got.</p>
-      <div class="picks">${rows}</div>
-      <button type="button" class="btn green big" id="kGo" data-kit="${esc(k.id)}" data-autofocus${n ? '' : ' disabled'}>${n ? `Add ${n} to the list` : 'It’s all on the list already'}</button>
+      ${serve}<div class="picks">${rows}</div>
+      <button type="button" class="btn green big" id="kGo" data-kit="${esc(k.id)}" data-base="${k.s || 0}" data-serves="${k.s || 0}" data-autofocus${n ? '' : ' disabled'}>${n ? `Add ${n} to the list` : 'It’s all on the list already'}</button>
       <p class="credit">Anything already on the list isn’t doubled up. A Bouncy Production · Made for Haz</p>`, 'Add ' + k.n);
   }
 
@@ -1023,13 +1200,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
 
   /* --- toast --- */
-  function toast(html, act) {        // act = {label, fn}: one button on the toast
+  function toast(html, act, alt) {   // act = {label, fn}: the main button. alt = a second choice (the toast stays up longer)
     const t = $('#toast');
-    $('#toastT').innerHTML = html; ui.toastAct = act || null;
+    $('#toastT').innerHTML = html; ui.toastAct = act || null; ui.toastAlt = alt || null;
     $('#toastB').textContent = act ? act.label : '';
     $('#toastB').classList.toggle('hide', !act);
+    $('#toastB2').textContent = alt ? alt.label : '';
+    $('#toastB2').classList.toggle('hide', !alt);
+    t.classList.toggle('duo', !!alt);
     t.classList.remove('hide');
-    clearTimeout(ui.toastT); ui.toastT = setTimeout(() => t.classList.add('hide'), 5000);
+    clearTimeout(ui.toastT); ui.toastT = setTimeout(() => t.classList.add('hide'), alt ? 9000 : 5000);
   }
 
   /* =====================================================================
@@ -1039,13 +1219,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     const r = W.add(view(), raw, Date.now(), myName());
     if (!r) return;
     if (r.dupe) {
-      const q = typeof raw === 'string' ? parseAdd(raw).q : '', id = r.item.id;
-      if (q && q !== (r.item.q || '')) {
-        toast(`${esc(r.item.n)}’s already on the list${r.item.q ? ' (' + esc(r.item.q) + ')' : ''}.`, { label: 'Make it ' + q, fn: () => {
-          const e = W.edit(view(), id, { q });
-          if (e.length) { write(e); toast(`${esc(r.item.n)}: now ${esc(q)}.`); }
-        } });
-      } else toast(`${esc(r.item.n)}’s already on the list.`);
+      const q = typeof raw === 'string' ? parseTyped(raw).q : '', id = r.item.id, nm = esc(r.item.n);
+      const setTo = (v) => () => { const e = W.edit(view(), id, { q: v }); if (e.length) { write(e); toast(`${nm}: now ${esc(v)}.`); } };
+      const sum = q ? sumQty(r.item.q, q) : null;
+      const said = `${nm}’s already on the list${r.item.q ? ' (' + esc(r.item.q) + ')' : ''}.`;
+      if (sum) toast(said, { label: 'Add them up: ' + sum, fn: setTo(sum) }, { label: 'Make it ' + q, fn: setTo(q) });   // 12 eggs + 4 eggs: 16, or just 4
+      else if (q && q !== (r.item.q || '')) toast(said, { label: 'Make it ' + q, fn: setTo(q) });
+      else toast(said);
       const row = $(`.row[data-id="${CSS.escape(r.item.id)}"]`);
       if (row) { row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash'); row.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
       return;
@@ -1056,8 +1236,10 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   function tick(id) {
     const x = itemsOf(view()).find((i) => i.id === id);
     if (!x) return;
-    write(W.tick(view(), id, x.s !== 'got', Date.now()));
+    const on = x.s !== 'got';
+    if (on) { ui.lastTick = id; clearTimeout(ui.dropT); ui.dropT = setTimeout(() => { ui.lastTick = ''; }, 900); }   // the new sticker drops into the basket
     const b = $(`[data-tick="${CSS.escape(id)}"]`); if (b) { b.classList.add('pop'); }
+    write(W.tick(view(), id, on, Date.now(), myName()));
     try { navigator.vibrate && navigator.vibrate(12); } catch (e) {}
   }
   function autoClear() {
@@ -1102,7 +1284,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#jCode').addEventListener('keydown', (e) => { if (e.key === 'Enter') joinList(); });
   $('#jCode').addEventListener('input', (e) => { const v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); if (v !== e.target.value) e.target.value = v; $('#jErr').textContent = ''; });
   $('#addF').addEventListener('submit', (e) => { e.preventDefault(); const i = $('#addI'); addText(i.value); i.value = ''; i.focus(); });
-  $('#toastB').addEventListener('click', () => { const a = ui.toastAct; ui.toastAct = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
+  $('#toastB').addEventListener('click', () => { const a = ui.toastAct; ui.toastAct = ui.toastAlt = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
+  $('#toastB2').addEventListener('click', () => { const a = ui.toastAlt; ui.toastAct = ui.toastAlt = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
   $('#bShare').addEventListener('click', () => nav('share'));
   $('#bKits').addEventListener('click', () => { ui.kline = ''; nav('kits'); window.scrollTo(0, 0); });
   $('#kBack').addEventListener('click', back);
@@ -1120,6 +1303,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#keDone').addEventListener('click', leaveKit);
   $('#keN').addEventListener('input', () => { clearTimeout(ui.keT); ui.keT = setTimeout(saveKitName, 500); });
   $('#keN').addEventListener('change', saveKitName);
+  $('#keSm').addEventListener('click', () => setServes(-1));
+  $('#keSp').addEventListener('click', () => setServes(1));
   $('#keN').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); saveKitName(); $('#keI').focus(); } });
   $('#keF').addEventListener('submit', (e) => { e.preventDefault(); kitAddText($('#keI').value); $('#keI').value = ''; $('#keI').focus(); });
   $('#keI').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kitAddText($('#keI').value); $('#keI').value = ''; } });
@@ -1151,6 +1336,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#items').addEventListener('click', (e) => {
     const t = e.target.closest('[data-tick]'); if (t) return tick(t.getAttribute('data-tick'));
     const ed = e.target.closest('[data-edit]'); if (ed) return nav('edit/' + ed.getAttribute('data-edit'));
+    if (e.target.closest('#bTrack')) { const t = $('#trol'); if (t) t.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+    if (e.target.closest('#bShowTrol')) { ui.showTrol = !ui.showTrol; render(); return; }
     if (e.target.closest('#bClear')) {
       if (ui.sure.clear && ui.sure.clear > Date.now()) { ui.sure.clear = 0; write(W.clear(itemsOf(view()).filter((x) => x.s === 'got'))); toast('Trolley cleared. Nice shop!'); }
       else { ui.sure.clear = Date.now() + 3000; render(); setTimeout(render, 3100); }
@@ -1206,15 +1393,25 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       pk.setAttribute('aria-pressed', String(on)); pk.classList.toggle('on', on);
       $('b', pk).innerHTML = on ? tickSvg.replace('width="18" height="18"', 'width="16" height="16"') : '';
       pk.closest('.pick').classList.toggle('off', !on);
-      $('em', pk.closest('.pick')).textContent = on ? (pk.dataset.q || '') : 'got some';
+      $('em', pk.closest('.pick')).textContent = on ? kitQ(pk.dataset.q) : 'got some';
       const n = $$('[data-pick][aria-pressed="true"]', $('#panel')).length, b2 = $('#kGo');
       b2.textContent = n ? `Add ${n} to the list` : 'Nothing to add'; b2.disabled = !n;
+      return;
+    }
+    const sv = e.target.closest('[data-serve]');
+    if (sv) {
+      const g = $('#kGo'), base = +g.dataset.base, now = Math.max(1, Math.min(20, +g.dataset.serves + +sv.dataset.serve));
+      g.dataset.serves = String(now);
+      $('#kSv').textContent = String(now);
+      $('#kSn').textContent = now === base ? 'As written' : 'Amounts changed from ' + base;
+      $$('[data-pick]', $('#panel')).forEach((b) => { if (b.getAttribute('aria-pressed') === 'true') $('em', b.closest('.pick')).textContent = kitQ(b.dataset.q); });
+      $$('[data-serve]', $('#panel')).forEach((b) => { b.disabled = (+b.dataset.serve < 0 && now <= 1) || (+b.dataset.serve > 0 && now >= 20); });
       return;
     }
     if (e.target.closest('#kGo')) {
       const id = $('#kGo').getAttribute('data-kit'), k = kitsOf(view()).find((x) => x.id === id); if (!k) return back();
       const keys = new Set($$('[data-pick][aria-pressed="true"]', $('#panel')).map((b) => b.getAttribute('data-pick')));
-      const r = W.addMany(view(), k.list.filter((i) => keys.has(i.k)), Date.now(), myName());
+      const r = W.addMany(view(), k.list.filter((i) => keys.has(i.k)).map((i) => Object.assign({}, i, { q: kitQ(i.q) })), Date.now(), myName());
       write(r.ops);
       r.ops.forEach((op) => { const m = /^items\/(.+)$/.exec(op.p); if (op.m === 'PUT' && m) addedHere(m[1]); });
       toast(fill(pick(LINES.kitadded), { n: r.added }) + (r.skipped ? ` ${r.skipped} were already there.` : ''));
@@ -1258,7 +1455,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => {});
 
   // for tests
-  window.__shrimply = { sync, view, W, guessAisle, parseAdd, parseLine, splitLines, kitsOf, withoutBy, keyOf, itemsOf, usualsOf, staleTrolley, applyOp, AUTO_CLEAR_MS, autoClear, ui, seen, renderTip };
+  window.__shrimply = { sync, view, W, guessAisle, parseAdd, parseLine, parseTyped, parseQty, sumQty, scaleQty, splitLines, kitsOf, withoutBy, keyOf, itemsOf, usualsOf, staleTrolley, applyOp, AUTO_CLEAR_MS, autoClear, ui, seen, renderTip };
 })();
 </script>
 </body>
