@@ -67,7 +67,8 @@ button{cursor:pointer}
 .pill{margin:3px 0 0;font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px}
 .pill i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);display:inline-block;flex-shrink:0}
 .pill.on i{background:#2fbf71} .pill.wait i{background:#fff;border-style:dashed} .pill.off i{background:var(--coral);border-radius:2px} .pill.no i{background:var(--warn);border-radius:2px} .pill.demo i{background:var(--sky)}
-.say{padding:12px 16px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.say{padding:12px 16px 0;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center}
+.say .btn{font-family:var(--head);font-size:16px;font-weight:600;min-height:48px;padding:0 12px;gap:6px}
 .banner{margin:12px 16px 0;border-radius:16px;padding:10px 14px;font-size:14px;font-weight:700;border:2.5px solid var(--ink);background:repeating-linear-gradient(135deg,var(--stripe1) 0 10px,var(--stripe2) 10px 20px)}
 .banner.bad{background:repeating-linear-gradient(135deg,#ffd6cf 0 10px,#ffe9e4 10px 20px)}
 .items{flex-grow:1;padding:0 16px 150px}
@@ -94,6 +95,29 @@ button{cursor:pointer}
 .tip p{margin:0;grid-column:1/-1;font-size:14px;line-height:1.4}
 .tip .acts2{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
 .tip .iconbtn{width:44px;height:44px;box-shadow:none}
+.whorow{display:grid!important;grid-template-columns:minmax(0,1fr) auto}
+.whorow .field{height:48px;background:var(--cream)}
+.nw.by{background:var(--peach);text-transform:none;letter-spacing:0}
+/* kits */
+.kits{flex-grow:1;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px}
+.kit{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:8px 10px 8px 8px;box-shadow:0 3px 0 var(--ink)}
+.kit .kb{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;border:none;background:none;padding:0;text-align:left;min-height:48px}
+.kit .badge{width:44px;height:44px;border-radius:12px;border:2.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:18px;font-weight:700}
+.kit .kn{display:block;font-family:var(--head);font-size:18px;font-weight:600;overflow-wrap:anywhere}
+.kit .ks{display:block;font-size:13px;font-weight:700;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kitedit{flex-grow:1;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px}
+.krow{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;gap:8px;align-items:center;min-height:48px;border-bottom:2px dashed var(--dash)}
+.krow .nm2{font-size:17px;font-weight:800;overflow-wrap:anywhere}
+.krow em{font-style:normal;font-size:14px;font-weight:700;color:var(--muted);max-width:120px;text-align:right;overflow-wrap:anywhere}
+.krow .rmx{width:44px;height:44px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;color:var(--warn)}
+.kadd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:start}
+.kadd textarea{height:auto;min-height:52px;padding:12px 14px;resize:vertical;font-family:var(--body);line-height:1.3}
+.pick{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;min-height:48px;border-bottom:2px dashed var(--dash)}
+.pick .tick b{border-radius:9px}
+.pick .nm2{font-size:17px;font-weight:800;overflow-wrap:anywhere}
+.pick.off .nm2{color:var(--faint)}
+.pick em{font-style:normal;font-size:13px;font-weight:700;color:var(--muted);text-align:right}
+.picks{max-height:46vh;overflow:auto}
 .empty{margin:28px 0 0;text-align:center;font-size:15px;color:var(--muted)}
 .addbar{position:fixed;left:0;right:0;bottom:0;z-index:6;pointer-events:none}
 .addbar>div{max-width:520px;margin:0 auto;background:var(--paper);border-top:3px solid var(--ink);padding:12px 16px calc(10px + var(--sb));pointer-events:auto}
@@ -104,6 +128,17 @@ button{cursor:pointer}
 .toast{position:absolute;left:16px;right:16px;bottom:calc(100% + 10px);background:var(--ink);color:#fff;border-radius:16px;padding:8px 8px 8px 14px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;min-height:52px;pointer-events:auto}
 .toast span{flex-grow:1}
 .toast b{color:#8fd0ff}
+.step{display:flex;align-items:center;gap:10px}
+.step .iconbtn{width:48px;height:48px;font-size:26px;font-weight:800;line-height:1}
+.step output{min-width:44px;text-align:center;font-family:var(--head);font-size:24px;font-weight:700}
+.step .iconbtn:disabled{opacity:.4}
+.serve{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--stripe2);border:3px solid var(--ink);border-radius:16px;padding:6px 6px 6px 14px}
+.serve b{font-size:16px;font-weight:800}
+.serve small{display:block;font-size:12.5px;font-weight:700;color:var(--muted)}
+.toast.duo{flex-wrap:wrap;padding:10px}
+.toast.duo span{flex:0 0 100%}
+.toast.duo button{flex:1 1 0;white-space:normal;line-height:1.15;padding:4px 10px}
+.toast button.alt{background:transparent;color:#fff;border:2px solid #fff}
 .toast button{white-space:nowrap;min-height:40px;padding:0 12px;border-radius:12px;border:none;background:var(--sun);color:var(--ink);font-size:14px;font-weight:800}
 
 /* usuals */
@@ -143,6 +178,48 @@ button{cursor:pointer}
 .link{border:none;background:none;color:var(--warn);font-size:15px;font-weight:800;text-decoration:underline;min-height:48px;align-self:center;padding:0 12px}
 .linkout{font-size:13px;word-break:break-all;color:var(--muted);text-align:center;margin:0}
 
+/* who added it, and the trolley */
+.row{grid-template-columns:44px minmax(0,1fr) auto}
+.who{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:800;color:var(--muted);padding-left:8px;max-width:110px}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.face{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:2.5px solid var(--ink);display:inline-flex;align-items:center;justify-content:center;font-family:var(--head);font-size:14px;font-weight:700;color:var(--ink);box-sizing:border-box;line-height:1}
+.face.plain{background:var(--green)}
+.track{display:block;width:100%;margin:14px 0 2px;background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:10px 12px 12px;box-shadow:0 3px 0 var(--ink);text-align:left;color:var(--ink);font-family:var(--body)}
+.track .tl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.track .tl b{font-family:var(--head);font-size:16px;font-weight:600}
+.track .tl small{font-size:12.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.rail{display:block;position:relative;height:36px;margin-top:4px}
+.rail::before,.rail i{content:"";position:absolute;left:0;top:22px;height:10px;border-radius:5px;border:2.5px solid var(--ink);box-sizing:border-box}
+.rail::before{right:0;height:14px;background:repeating-linear-gradient(90deg,var(--stripe1) 0 10px,var(--stripe2) 10px 20px)}
+.rail i{height:14px;background:var(--green);min-width:14px;transition:width .5s ease}
+.rail svg{position:absolute;top:-4px;transition:left .5s ease}
+.cart{position:relative;margin-top:14px;padding-left:26px}
+.cart .handle{position:absolute;left:0;top:-6px}
+.basket{background:repeating-linear-gradient(0deg,var(--stripe1) 0 14px,var(--sun) 14px 17px);border:3.5px solid var(--ink);border-radius:10px 10px 34px 34px;box-shadow:0 4px 0 var(--ink);padding:14px 10px 22px;display:flex;flex-wrap:wrap;gap:9px 8px;justify-content:center}
+.stick{transform:rotate(var(--r));display:inline-flex;align-items:center;gap:6px;min-height:44px;max-width:100%;padding:0 12px 0 5px;border:2.5px solid var(--ink);border-radius:22px;background:var(--paper);font-family:var(--body);font-size:15px;font-weight:800;color:var(--ink);box-shadow:0 2px 0 var(--ink);text-align:left}
+.stick span{overflow-wrap:anywhere}
+.stick .face{width:28px;height:28px}
+.stick.drop{animation:drop .5s cubic-bezier(.3,1.5,.6,1)}
+@keyframes drop{0%{transform:translateY(-40px) rotate(0) scale(.6);opacity:0}100%{transform:rotate(var(--r));opacity:1}}
+.stick.pop{animation:pop .3s ease}
+.wheels{display:flex;justify-content:space-between;padding:0 40px;margin-top:-6px}
+.wheels i{width:26px;height:26px;border-radius:50%;border:3.5px solid var(--ink);background:var(--paper);box-sizing:border-box}
+.cartnote{text-align:center;margin-top:10px}
+.allgot{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:18px;text-align:center}
+.allgot .bigcart{max-width:100%;height:auto}
+.allgot h2{margin:0;font-family:var(--head);font-size:32px;font-weight:700}
+.allgot .tally{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.allgot .tally span{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px 0 5px;border:2.5px solid var(--ink);border-radius:20px;background:var(--paper);font-size:14px;font-weight:800}
+.allgot .tally .face{width:28px;height:28px}
+.allgot .btn.big{padding:0 26px}
+.allgot .link{color:var(--muted)}
+.conf i{position:absolute;width:12px;height:12px;border-radius:50%;border:2.5px solid var(--ink);animation:conf .7s cubic-bezier(.3,1.6,.6,1) both}
+.conf i:nth-child(1){left:6%;top:30px;background:#ff8fa3}
+.conf i:nth-child(2){right:8%;top:46px;border-radius:3px;transform:rotate(20deg);background:var(--sky);animation-delay:.08s}
+.conf i:nth-child(3){left:14%;top:196px;width:10px;height:10px;background:var(--green);animation-delay:.16s}
+.conf i:nth-child(4){right:12%;top:208px;border-radius:3px;background:#c79bff;animation-delay:.24s}
+.conf i:nth-child(5){left:50%;top:6px;width:10px;height:10px;background:var(--sun);animation-delay:.12s}
+@keyframes conf{0%{transform:scale(0)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* narrow phones go last so base rules don't win */
 @media (max-width:370px){
@@ -151,6 +228,10 @@ button{cursor:pointer}
   .hero h1{font-size:40px}
   .nm em{max-width:110px}
   .sharebtn{padding:0 10px}
+  .say .btn{padding:0 9px;font-size:15px}
+  .say .btn svg{display:none}
+  .who span{display:none}
+  .wheels{padding:0 28px}
 }
 </style>
 </head>
@@ -202,12 +283,17 @@ button{cursor:pointer}
     <div class="banner bad hide" id="denyBan">Firebase isn’t letting this list through. Check the database rules have been published (see the README).</div>
     <div class="say">
       <div class="bubble" id="say" aria-live="polite"></div>
-      <button type="button" class="btn coral small" id="bUsuals" style="font-family:var(--head);font-size:16px;font-weight:600;min-height:48px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>Usuals</button>
+      <button type="button" class="btn coral small" id="bUsuals"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></svg>Usuals</button>
+      <button type="button" class="btn sun small" id="bKits"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16l-1.5 12h-13z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Kits</button>
     </div>
+    <form class="tip hide" id="who" autocomplete="off"><h2>Who’s this?</h2><span></span>
+      <p>Tell the house your name, so everyone can see who added what.</p>
+      <div class="acts2 whorow"><label for="whoI" class="sr">Your name</label><input id="whoI" class="field" maxlength="16" placeholder="e.g. Haz" autocomplete="given-name" enterkeyhint="done"><button type="submit" class="btn green small">That’s me</button></div>
+    </form>
     <div class="tip hide" id="tip" role="note"></div>
     <div class="items" id="items"></div>
     <div class="addbar"><div style="position:relative">
-      <div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB" class="hide">Change</button></div>
+      <div class="toast hide" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB2" class="alt hide"></button><button type="button" id="toastB" class="hide">Change</button></div>
       <form class="addrow" id="addF" autocomplete="off">
         <label for="addI" class="sr">Add an item</label>
         <input id="addI" class="field" placeholder="Add something…" maxlength="70" enterkeyhint="done">
@@ -233,6 +319,41 @@ button{cursor:pointer}
     </div>
   </section>
 
+  <section id="vKits" class="view hide" aria-labelledby="kT">
+    <header class="top coral">
+      <button type="button" class="iconbtn" id="kBack" aria-label="Back to the list"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="tt"><h1 id="kT">Kits</h1></div>
+      <button type="button" class="btn small" id="kNew">+ New kit</button>
+    </header>
+    <p class="uhint">Things you buy together, like a weekly shop or a recipe. Tap <b>Add</b>, untick what you’ve still got, and the rest goes on the list.</p>
+    <div class="kits" id="klist"></div>
+    <div class="ufoot">
+      <div class="say2"><span data-shrimp="48"></span><div class="bubble" id="kSay"></div></div>
+      <p class="credit">A Bouncy Production · Made for Haz</p>
+    </div>
+  </section>
+  <section id="vKit" class="view hide" aria-labelledby="keT">
+    <header class="top coral">
+      <button type="button" class="iconbtn" id="keBack" aria-label="Back to kits"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="tt"><h1 id="keT">Edit kit</h1></div>
+    </header>
+    <div class="kitedit">
+      <div><label class="lb" for="keN">Kit name</label><input id="keN" class="field" maxlength="40" placeholder="e.g. Taco night" autocomplete="off"></div>
+      <div><span class="lb" id="keSl">Serves</span><div class="step" role="group" aria-labelledby="keSl"><button type="button" class="iconbtn" id="keSm" aria-label="Serves fewer">−</button><output id="keSv" aria-live="polite">–</output><button type="button" class="iconbtn" id="keSp" aria-label="Serves more">+</button></div>
+        <p class="note" style="margin-top:6px" id="keSn">Only for recipes. Set it and you can cook for more (or fewer) when you add the kit.</p></div>
+      <div><label class="lb" for="keI">Add things</label>
+        <form class="kadd" id="keF" autocomplete="off"><textarea id="keI" class="field" rows="1" maxlength="2000" placeholder="e.g. 500g mince" enterkeyhint="done"></textarea><button type="submit" class="btn green" style="min-height:52px;box-shadow:0 3px 0 var(--ink)">Add</button></form>
+        <p class="note" style="margin-top:6px">Got a recipe? Paste its ingredients in one go and I’ll split them up.</p>
+      </div>
+      <div id="keList"></div>
+      <button type="button" class="btn small" id="keFill" style="align-self:flex-start">Copy in what’s on the list now</button>
+      <button type="button" class="link" id="keDel">Delete this kit</button>
+    </div>
+    <div class="ufoot">
+      <button type="button" class="btn green big" id="keDone">Done</button>
+      <p class="credit">A Bouncy Production · Made for Haz</p>
+    </div>
+  </section>
   <div class="sheet hide" id="sheet"><button type="button" class="back" id="sheetBack" aria-label="Close" tabindex="-1"></button><div class="panel" id="panel" role="dialog" aria-modal="true"></div></div>
 </div>
 <script src="sync-config.js"></script>
@@ -313,6 +434,94 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     else if ((m = s.match(/^(.+?)\s*[x×]\s*(\d{1,3})$/i)) && +m[2] > 0) { q = '×' + (+m[2]); s = m[1]; }
     return { n: tidyName(s), q };
   }
+  // a kit/recipe line: "200g mince", "2 tbsp olive oil", "1 tin of chopped tomatoes", "eggs x6", "salt"
+  const UNITS = 'g|kg|mg|ml|l|ltr|litres?|cl|oz|lb|lbs|tsp|tbsp|teaspoons?|tablespoons?|cups?|tins?|cans?|jars?|packs?|packets?|bags?|bottles?|cloves?|bunch(?:es)?|handfuls?|pinch(?:es)?|slices?|sprigs?|heads?|sticks?|pints?|rashers?|fillets?';
+  const LINE_RE = new RegExp('^((?:\\d+(?:[.,/]\\d+)?|[½¼¾])\\s*(?:' + UNITS + ')?)\\.?\\s+(?:of\\s+)?(.+)$', 'i');
+  function parseLine(raw) {
+    let s = String(raw || '').replace(/^[\s•*·\-–]+/, '').replace(/\s+/g, ' ').trim();
+    if (!s) return { n: '', q: '' };
+    const m = s.match(LINE_RE);
+    if (m) {
+      const amt = m[1].replace(/\s+/g, ' ').trim(), bare = /^\d+$/.test(amt);
+      return { n: tidyName(m[2]), q: (bare ? '×' + (+amt) : amt).slice(0, 40) };
+    }
+    return parseAdd(s);
+  }
+  // several lines (a pasted recipe): one thing per line, and "1 onion, chopped" keeps just the onion.
+  // One line: "milk, bread, eggs" is three things.
+  const splitLines = (raw) => {
+    const t = String(raw || '').replace(/\r/g, '');
+    const parts = /\n/.test(t.trim()) ? t.split(/\n+/).map((l) => l.replace(/\s*[,(].*$/, '')) : t.split(/[,;]/);
+    return parts.map((x) => x.trim()).filter(Boolean).slice(0, 60);
+  };
+  // the add box: "2 lemons" / "eggs x12" / "6 x eggs" as before, and now "500g mince" or "2 tins of tomatoes" too
+  const parseTyped = (raw) => (/^\s*\d{1,3}\s*[x×]\s|[x×]\s*\d{1,3}\s*$/i.test(String(raw || '')) ? parseAdd(raw) : parseLine(raw));
+
+  /* --- amounts: adding two together, and scaling a recipe. Anything we can't read is left alone. --- */
+  const FRAC = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 1 / 3, '⅔': 2 / 3 };
+  const UNIT_OF = {   // spelling → [family, size in the family's base, how to write it]
+    g: ['g', 1, 'g'], kg: ['g', 1000, 'kg'], mg: ['g', 0.001, 'mg'],
+    ml: ['ml', 1, 'ml'], cl: ['ml', 10, 'cl'], l: ['ml', 1000, 'l'], ltr: ['ml', 1000, 'l'], litre: ['ml', 1000, 'l'], liter: ['ml', 1000, 'l'],
+    oz: ['oz', 1, 'oz'], lb: ['lb', 1, 'lb'], tsp: ['tsp', 1, 'tsp'], teaspoon: ['tsp', 1, 'tsp'], tbsp: ['tbsp', 1, 'tbsp'], tablespoon: ['tbsp', 1, 'tbsp'],
+  };
+  const SPOONY = /^(tsp|tbsp|cup|pinch|handful)$/;            // these read nicer as ½ and ¼ than 0.5
+  function unitWord(u) {   // "Tins" → tin, "bunches" → bunch, "kg" → kg
+    u = String(u || '').toLowerCase().replace(/\.$/, '');
+    if (UNIT_OF[u]) return u;
+    if (/(ch|sh)es$/.test(u)) u = u.slice(0, -2); else if (/[^s]s$/.test(u) && u.length > 2) u = u.slice(0, -1);
+    return u;
+  }
+  function parseQty(q) {   // "×4" → {v:4,u:''}, "200g" → {v:200,u:'g'}, "1½ tbsp" → {v:1.5,u:'tbsp'}, "the barista one" → null
+    const m = String(q || '').trim().match(/^[x×]?\s*(\d+(?:[.,]\d+)?(?:\s*[½¼¾⅓⅔])?|\d+\s*\/\s*\d+|\d+\s+\d+\s*\/\s*\d+|[½¼¾⅓⅔])\s*([a-z]+\.?)?$/i);
+    if (!m) return null;
+    let s = m[1].replace(',', '.').replace(/\s+/g, ' '), v = 0;
+    const mixed = s.match(/^(\d+) (\d+)\s?\/\s?(\d+)$/), fr = s.match(/^(\d+)\s?\/\s?(\d+)$/), uni = s.match(/^(\d+(?:\.\d+)?)?\s?([½¼¾⅓⅔])$/);
+    if (mixed) v = +mixed[1] + mixed[2] / mixed[3];
+    else if (fr) v = fr[1] / fr[2];
+    else if (uni) v = (+uni[1] || 0) + FRAC[uni[2]];
+    else v = +s;
+    if (!isFinite(v) || v <= 0) return null;
+    return { v, u: unitWord(m[2] || '') };
+  }
+  function numText(v, quarters) {
+    if (quarters) {
+      const r = Math.round(v * 4) / 4, w = Math.floor(r), f = r - w;
+      if (r <= 0) return '¼';
+      return (w ? String(w) : '') + (f === 0.25 ? '¼' : f === 0.5 ? '½' : f === 0.75 ? '¾' : '');
+    }
+    return String(Math.round(v * 100) / 100);
+  }
+  function qtyText(v, u) {
+    if (!u) return '×' + numText(v);
+    const k = UNIT_OF[u];
+    if (k && k[0] === 'g' && k[1] === 1 && v >= 1000) return qtyText(v / 1000, 'kg');      // 1100g → 1.1kg
+    if (k && k[0] === 'ml' && k[1] === 1 && v >= 1000) return qtyText(v / 1000, 'l');
+    if (k && (k[2] === 'kg' || k[2] === 'l') && v < 1) return qtyText(Math.round(v * 1000), k[0]);   // 0.75kg → 750g
+    if (k) return numText(v, SPOONY.test(k[0])) + (/^(g|kg|mg|ml|cl|l|oz|lb)$/.test(k[2]) ? '' : ' ') + k[2];
+    const many = v > 1, word = many ? (/(ch|sh)$/.test(u) ? u + 'es' : u + 's') : u;
+    return numText(v, SPOONY.test(u)) + ' ' + word;
+  }
+  function sumQty(a, b) {  // "×12" + "×4" → "×16", "500g" + "1kg" → "1.5kg", "2 tins" + "1 tin" → "3 tins". Different kinds → null
+    const x = parseQty(a), y = parseQty(b);
+    if (!x || !y) return null;
+    const fx = UNIT_OF[x.u], fy = UNIT_OF[y.u];
+    if (fx && fy) {
+      if (fx[0] !== fy[0]) return null;
+      return qtyText((x.v * fx[1] + y.v * fy[1]) / UNIT_OF[fx[0]][1], fx[0]);
+    }
+    if (fx || fy || x.u !== y.u) return null;
+    return qtyText(x.v + y.v, x.u);
+  }
+  function scaleQty(q, f) {   // a recipe for 2 made for 4: f = 2. Things you buy whole (tins, onions) round up.
+    const x = parseQty(q);
+    if (!x || !(f > 0) || f === 1) return String(q || '');
+    let v = x.v * f;
+    const fam = UNIT_OF[x.u];
+    if (!fam && !SPOONY.test(x.u)) v = Math.ceil(v - 1e-9);                     // 1.5 tins → 2 tins, ×1.5 → ×2
+    else if (fam && (fam[0] === 'g' || fam[0] === 'ml') && fam[1] === 1) v = Math.round(v);   // grams and ml: whole numbers
+    return qtyText(v, x.u);
+  }
+  const tidyWho = (s) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, 16);
   const newId = () => 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   function newCode() { let c = ''; const r = new Uint32Array(6); try { crypto.getRandomValues(r); } catch (e) { for (let i = 0; i < 6; i++) r[i] = Math.floor(Math.random() * 1e9); } for (let i = 0; i < 6; i++) c += ALPHA[r[i] % ALPHA.length]; return c; }
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -364,6 +573,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       .map((x) => Object.assign(x, { a: AISLE[x.a] ? x.a : guessAisle(x.n), c: typeof x.c === 'number' ? Math.max(0, x.c) : 0 }))
       .sort((a, b) => b.c - a.c || (b.t || 0) - (a.t || 0) || a.n.localeCompare(b.n));
   }
+  function kitsOf(tree) {
+    const k = obj(obj(tree).kits);
+    return Object.keys(k).map((id) => Object.assign({ id }, obj(k[id])))
+      .filter((x) => typeof x.n === 'string' && x.n)
+      .map((x) => Object.assign(x, { list: Object.keys(obj(x.items)).map((key) => Object.assign({ k: key }, obj(x.items[key]))).filter((i) => typeof i.n === 'string' && i.n).map((i) => Object.assign(i, { a: AISLE[i.a] ? i.a : guessAisle(i.n) })).sort((a, b) => (a.o || 0) - (b.o || 0) || a.n.localeCompare(b.n)) }))
+      .sort((a, b) => (a.t || 0) - (b.t || 0) || a.n.localeCompare(b.n));
+  }
   const aisleFor = (tree, name) => { const u = obj(obj(obj(tree).usual)[keyOf(name)]); return AISLE[u.a] ? u.a : guessAisle(name); };
   // the trolley clears itself once nobody has ticked anything for AUTO_CLEAR_MS
   function staleTrolley(items, now) {
@@ -375,8 +591,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   /* --- the writes the app makes --- */
   const W = {
-    add(tree, raw, now) {        // → {ops, item, dupe}
-      const p = typeof raw === 'string' ? parseAdd(raw) : { n: tidyName(raw.n), q: String(raw.q || '').trim().slice(0, 40) };
+    add(tree, raw, now, by) {    // → {ops, item, dupe}. by = this phone's name (who added it)
+      const p = typeof raw === 'string' ? parseTyped(raw) : { n: tidyName(raw.n), q: String(raw.q || '').trim().slice(0, 40) };
       if (!p.n) return null;
       const k = keyOf(p.n);
       const dupe = itemsOf(tree).find((x) => x.s === 'need' && keyOf(x.n) === k);
@@ -385,11 +601,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const id = newId();
       const item = { n: p.n, a, s: 'need', c: now };
       if (p.q) item.q = p.q;
+      if (tidyWho(by)) item.b = tidyWho(by);
       const ops = [{ m: 'PUT', p: 'items/' + id, b: item }];
       if (!obj(obj(tree).usual)[k]) ops.push({ m: 'PATCH', p: 'usual/' + k, b: { n: p.n, a, t: now } });
       return { ops, item: Object.assign({ id }, item), dupe: false };
     },
-    tick(tree, id, on, now) {    // ticking counts towards the usuals (and unticking takes it back)
+    tick(tree, id, on, now, by) {    // ticking counts towards the usuals (and unticking takes it back). by = who got it
       const x = itemsOf(tree).find((i) => i.id === id);
       if (!x || (x.s === 'got') === !!on) return [];
       // the count is written as a plain number, not a server increment, so a retry on a flaky
@@ -397,7 +614,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const k = keyOf(x.n), body = { n: x.n, a: x.a, s: on ? 'got' : 'need', c: x.c || now };
       const was = obj(obj(obj(tree).usual)[k]).c, cnt = Math.max(0, (typeof was === 'number' ? was : 0) + (on ? 1 : -1));
       if (x.q) body.q = x.q;
+      if (x.b) body.b = x.b;
       if (on) body.g = now;
+      if (on && tidyWho(by)) body.w = tidyWho(by);
       const b = { ['items/' + id]: body, ['usual/' + k + '/c']: cnt, ['usual/' + k + '/n']: x.n, ['usual/' + k + '/a']: x.a };
       if (on) b['usual/' + k + '/t'] = now;
       return [{ m: 'PATCH', p: '', b }];
@@ -408,7 +627,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const n = tidyName(f.n) || x.n, a = AISLE[f.a] ? f.a : x.a, q = String(f.q == null ? x.q || '' : f.q).trim().slice(0, 40);
       const body = { n, a, s: x.s, c: x.c || Date.now() };
       if (q) body.q = q;
+      if (x.b) body.b = x.b;
       if (x.g) body.g = x.g;
+      if (x.w) body.w = x.w;
       const ops = [{ m: 'PUT', p: 'items/' + id, b: body }];
       if (n !== x.n || a !== x.a) ops.push({ m: 'PATCH', p: 'usual/' + keyOf(n), b: { n, a } });   // remember the aisle for next time
       return ops;
@@ -416,7 +637,42 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     remove: (id) => [{ m: 'DELETE', p: 'items/' + id }],
     clear(items) { if (!items.length) return []; const b = {}; items.forEach((x) => { b['items/' + x.id] = null; }); return [{ m: 'PATCH', p: '', b }]; },
     forget: (k) => [{ m: 'DELETE', p: 'usual/' + k }],
+    // kits: lists you buy together (weekly basics, taco night, a recipe). Each kit is one record, written whole.
+    kitPut(id, kit) {
+      const items = {};
+      (kit.list || []).slice(0, 60).forEach((i, n) => { const k = keyOf(i.n); if (items[k]) return; const it = { n: tidyName(i.n), a: AISLE[i.a] ? i.a : guessAisle(i.n), o: n }; const q = String(i.q || '').trim().slice(0, 40); if (q) it.q = q; items[k] = it; });
+      const b = { n: String(kit.n || '').replace(/\s+/g, ' ').trim().slice(0, 40) || 'Kit', t: kit.t || Date.now() };
+      const sv = Math.round(+kit.s);
+      if (sv >= 1 && sv <= 20) b.s = sv;          // serves: only for recipes
+      if (Object.keys(items).length) b.items = items;
+      return [{ m: 'PUT', p: 'kits/' + id, b }];
+    },
+    kitDel: (id) => [{ m: 'DELETE', p: 'kits/' + id }],
+    addMany(tree, list, now, by) {   // → {ops, added, skipped}: things already on the list aren't doubled up
+      let t = clone(tree) || {}, ops = [], added = 0, skipped = 0;
+      list.forEach((i, n) => {
+        const r = W.add(t, { n: i.n, q: i.q, a: i.a }, now + n, by);
+        if (!r) return;
+        if (r.dupe) { skipped++; return; }
+        r.ops.forEach((op) => { ops.push(op); t = applyOp(t, op, now); });
+        added++;
+      });
+      return { ops, added, skipped };
+    },
   };
+  // the same write without the newer fields (who added it, serves), for a database whose rules haven't been updated yet
+  function withoutBy(op) {
+    // newest field first: v1.2 rules know "b" (who added it) but not "w" (who got it), v1.1 rules know neither
+    const strip = (v) => { if (v && typeof v === 'object' && (typeof v.b === 'string' || typeof v.w === 'string')) { v = Object.assign({}, v); if (typeof v.w === 'string') delete v.w; else delete v.b; } return v; };
+    if (op.m === 'PUT' && /^items\//.test(op.p) && op.b && ('b' in op.b || 'w' in op.b)) return Object.assign({}, op, { b: strip(op.b) });
+    if (op.m === 'PUT' && /^kits\//.test(op.p) && op.b && 's' in op.b) { const b = Object.assign({}, op.b); delete b.s; return Object.assign({}, op, { b }); }   // v1.2 rules: no "serves" yet
+    if (op.m === 'PATCH' && op.p === '') {
+      let changed = false; const b = {};
+      Object.keys(obj(op.b)).forEach((k) => { const v = /^items\/[^/]+$/.test(k) ? strip(op.b[k]) : op.b[k]; if (v !== op.b[k]) changed = true; b[k] = v; });
+      if (changed) return Object.assign({}, op, { b });
+    }
+    return null;
+  }
 
   /* =====================================================================
      STORAGE · the code, the last copy of the list, and any changes still
@@ -559,7 +815,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
           sync.queue.shift(); persist();
           if (sync.status === 'offline' || sync.status === 'connecting') tx.reopen();
         } catch (e) {
-          if (e && e.denied) { sync.queue.shift(); persist(); setStatus('denied'); continue; }
+          if (e && e.denied) {
+            const lite = withoutBy(op);                  // old rules don't know "who added it" yet: send it without
+            if (lite) { sync.queue[0] = lite; persist(); continue; }
+            sync.queue.shift(); persist(); setStatus('denied'); continue;
+          }
           if (sync.status !== 'denied') setStatus(navigator.onLine === false || sync.status !== 'online' ? 'offline' : 'connecting');
           sync.retryT = setTimeout(flush, sync.backoff); sync.backoff = Math.min(30000, sync.backoff * 2);
           break;
@@ -581,6 +841,10 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     done: ['All got! The trolley clears itself later, or tap Clear trolley.', 'Trolley full, list empty. Shrimply the best.'],
     offline: ['No signal? No problem. I’m writing it all down.', 'Your ticks are safe with me. They’ll swim over when you’re back online.'],
     news: ['{new} new since you last looked. Look for the labels.', 'Psst. The house added {new} while you were away.'],
+    newsby: ['{who} added {new} while you were away.', '{who} has been busy: {new} new on the list.'],
+    kits: ['A kit is a shop in a box. Well, a list in a list.', 'Taco night? I’ve got a kit for that. Well, you might.', 'Same stuff every week? Kit it.'],
+    nokits: ['No kits yet. Make one for the weekly shop, or paste in a recipe.'],
+    kitadded: ['{n} things swam onto the list.', 'Done! {n} things on the list.'],
     usuals: ['Tap tap tap, done.', 'The usual suspects.', 'Restocking? I love a restock.'],
     nousuals: ['Nothing here yet. Everything you add to the list turns up here, most-bought first.'],
     poke: ['Oi. That tickles.', 'I’m a shrimp, not a button.', 'Boop received.'],
@@ -607,9 +871,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   if (!Array.isArray(seen.mine)) seen.mine = [];
   function saveSeen() { try { localStorage.setItem(SEEN, JSON.stringify(seen)); } catch (e) {} }
   function lookFrom(code) {           // a different list (or the first time): nothing counts as new yet
-    if (seen.code !== code || typeof seen.t !== 'number') { seen.code = code; seen.t = Date.now(); seen.mine = []; saveSeen(); }
+    if (seen.code !== code || typeof seen.t !== 'number') { seen.code = code; seen.t = Date.now(); seen.mine = []; seen.opens = 0; }
+    seen.opens = (+seen.opens || 0) + 1; saveSeen();
     ui.since = seen.t;
   }
+  const myName = () => (typeof seen.name === 'string' ? tidyWho(seen.name) : '');
+  function setName(v) { const n = tidyWho(v); if (!n) return false; seen.name = n; saveSeen(); return true; }
   function addedHere(id) { seen.mine.push(id); if (seen.mine.length > 300) seen.mine = seen.mine.slice(-300); saveSeen(); }
   const isNew = (x) => x.s === 'need' && (x.c || 0) > ui.since && !seen.mine.includes(x.id);
 
@@ -619,11 +886,11 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     return { r: r || '', arg: arg || '' };
   }
   const go = (h, replace) => { const u = location.pathname + location.search + (h ? '#/' + h : ''); if (replace) history.replaceState(null, '', u); else history.pushState(null, '', u); render(); };
-  const back = () => { if (history.length > 1 && ui.pushed) { ui.pushed--; history.back(); } else go('', true); };
+  const back = () => { if (history.length > 1 && ui.pushed) history.back(); else go('', true); };   // popstate does the counting
   function nav(h) { ui.pushed = (ui.pushed || 0) + 1; go(h); }
   window.addEventListener('popstate', () => { if (ui.pushed) ui.pushed--; render(); });
 
-  function show(id) { ['vWelcome', 'vJoin', 'vList', 'vUsuals'].forEach((v) => $('#' + v).classList.toggle('hide', v !== id)); }
+  function show(id) { ['vWelcome', 'vJoin', 'vList', 'vUsuals', 'vKits', 'vKit'].forEach((v) => $('#' + v).classList.toggle('hide', v !== id)); }
 
   function render() {
     const { r, arg } = route();
@@ -635,6 +902,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (r === 'join') { show('vJoin'); $('#jSwap').classList.remove('hide'); closeSheet(); return; }
     const tree = view(); ui.lastTree = tree;
     if (r === 'usuals') { show('vUsuals'); renderUsuals(tree); closeSheet(); return; }
+    if (r === 'kit') { const k = kitsOf(tree).find((x) => x.id === arg); if (!k) { go('kits', true); return; } show('vKit'); renderKit(k); closeSheet(); return; }
+    if (r === 'kits' || r === 'kitadd') {
+      show('vKits'); renderKits(tree);
+      if (r === 'kitadd') { const k = kitsOf(tree).find((x) => x.id === arg); if (k) openKitAdd(k, tree); else { closeSheet(); go('kits', true); } } else closeSheet();
+      return;
+    }
     show('vList'); renderList(tree);
     if (r === 'edit') { const it = itemsOf(tree).find((x) => x.id === arg); if (it) openEdit(it, tree); else { closeSheet(); go('', true); } }
     else if (r === 'share') openShare();
@@ -658,27 +931,61 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   /* --- the list --- */
   const tickSvg = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b1b3d" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  // everyone gets a colour from their name, so Ann is the same purple on every phone
+  const FACES = ['#c79bff', '#6ec1ff', '#ff8fa3', '#ffb38a', '#5ee0b8', '#ffc93c', '#8ee3ef'];
+  function faceCol(name) { let h = 0; const s = String(name || '').toLowerCase(); for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return FACES[h % FACES.length]; }
+  const face = (name) => `<b class="face" style="background:${faceCol(name)}" aria-hidden="true">${esc(Array.from(String(name).trim())[0] || '?').toUpperCase()}</b>`;
   function rowHtml(x) {
-    const got = x.s === 'got', nw = !got && isNew(x);
-    return `<div class="row${got ? ' got' : ''}" data-id="${esc(x.id)}">` +
-      `<button type="button" class="tick${got ? ' on' : ''}" data-tick="${esc(x.id)}" aria-pressed="${got}" aria-label="${got ? 'Put back on the list: ' : 'Got it: '}${esc(x.n)}"><b>${got ? tickSvg : ''}</b></button>` +
-      `<button type="button" class="nm" data-edit="${esc(x.id)}" aria-label="Edit ${esc(x.n)}${x.q ? ', ' + esc(x.q) : ''}${nw ? ', new' : ''}"><span>${esc(x.n)}${nw ? '<i class="nw" aria-hidden="true">new</i>' : ''}</span><em>${esc(x.q || '')}</em></button></div>`;
+    const nw = isNew(x), by = x.b ? esc(x.b) : '';
+    return `<div class="row" data-id="${esc(x.id)}">` +
+      `<button type="button" class="tick" data-tick="${esc(x.id)}" aria-pressed="false" aria-label="Got it: ${esc(x.n)}"><b></b></button>` +
+      `<button type="button" class="nm" data-edit="${esc(x.id)}" aria-label="Edit ${esc(x.n)}${x.q ? ', ' + esc(x.q) : ''}${nw ? ', new' : ''}${by ? ', added by ' + by : ''}"><span>${esc(x.n)}${nw ? '<i class="nw" aria-hidden="true">new</i>' : ''}</span><em>${esc(x.q || '')}</em></button>` +
+      (by ? `<span class="who" aria-hidden="true">${face(x.b)}<span>${by}</span></span>` : '<span></span>') + '</div>';
   }
+  // the trolley: everything ticked, as stickers in a basket. The face is who put it in. Tap a sticker to put it back.
+  const TILT = [-4, 3, -2, 2, -3, 4, -1, 1];
+  function basketHtml(got, clearBtn) {
+    const sure = ui.sure.clear && ui.sure.clear > Date.now();
+    let h = `<div class="trolhead" id="trol"><h2 class="sec">In the trolley · ${got.length}</h2><span class="gap"></span>` +
+      (clearBtn ? `<button type="button" class="btn small${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button>` : '') + '</div>';
+    h += '<div class="cart"><svg class="handle" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 6h10l12 14" fill="none" stroke="#2b1b3d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="basket">';
+    got.slice().reverse().forEach((x, i) => {   // newest on top
+      let k = 0; for (const c of x.id) k = (k + c.charCodeAt(0)) % TILT.length;
+      h += `<button type="button" class="stick${x.id === ui.lastTick ? ' drop' : ''}" style="--r:${TILT[k]}deg" data-tick="${esc(x.id)}" aria-pressed="true" aria-label="Put back on the list: ${esc(x.n)}${x.w ? ', got by ' + esc(x.w) : ''}">` +
+        (x.w ? face(x.w) : `<b class="face plain" aria-hidden="true">${tickSvg.replace('width="18" height="18"', 'width="14" height="14"')}</b>`) + `<span>${esc(x.n)}${x.q ? ' · ' + esc(x.q) : ''}</span></button>`;
+    });
+    h += '</div><div class="wheels" aria-hidden="true"><i></i><i></i></div></div>';
+    h += '<p class="note cartnote">' + (got.some((x) => x.w) ? 'The face on each sticker is who put it in. ' : '') + 'Tap one to put it back on the list.</p>';
+    return h;
+  }
+  function tally(got) {   // [[name, count]] most first
+    const c = {}; got.forEach((x) => { if (x.w) c[x.w] = (c[x.w] || 0) + 1; });
+    return Object.keys(c).map((n) => [n, c[n]]).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }
+  const CART_SVG = '<svg class="bigcart" width="260" height="210" viewBox="0 0 260 210" role="img" aria-label="The Shrimp riding a full trolley"><path d="M20 40h28l26 112h138l26-86H60" fill="#ffd23f" stroke="#2b1b3d" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><path d="M92 70l10 76M132 70v78M172 70l-8 78M208 70l-16 78M68 108h160" stroke="#2b1b3d" stroke-width="4" stroke-linecap="round"/><rect x="78" y="40" width="34" height="30" rx="5" fill="#6ec1ff" stroke="#2b1b3d" stroke-width="5"/><rect x="182" y="30" width="26" height="40" rx="6" fill="#7ed957" stroke="#2b1b3d" stroke-width="5"/><ellipse cx="160" cy="58" rx="22" ry="14" fill="#ffb38a" stroke="#2b1b3d" stroke-width="5"/><circle cx="80" cy="182" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><circle cx="198" cy="182" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><g transform="translate(104 -6) scale(0.42)"><path d="M150 72C172 122 124 166 74 152" fill="none" stroke="#2b1b3d" stroke-width="66" stroke-linecap="round"/><path d="M150 72C172 122 124 166 74 152" fill="none" stroke="#ff7a59" stroke-width="52" stroke-linecap="round"/><path d="M150 42C160 10 185 6 200 16M140 42C138 12 120 4 104 10" fill="none" stroke="#2b1b3d" stroke-width="7" stroke-linecap="round"/><ellipse cx="152" cy="70" rx="38" ry="34" fill="#ff7a59" stroke="#2b1b3d" stroke-width="9"/><circle cx="160" cy="60" r="14" fill="#fff" stroke="#2b1b3d" stroke-width="6"/><circle cx="163" cy="62" r="7" fill="#2b1b3d"/><path d="M150 84q12 16 26 0" fill="#fff" stroke="#2b1b3d" stroke-width="6" stroke-linecap="round"/></g></svg>';
   function renderList(tree) {
     renderPill();
     const all = itemsOf(tree), need = all.filter((x) => x.s === 'need').sort(byAisle);
     const got = all.filter((x) => x.s === 'got').sort((a, b) => (a.g || 0) - (b.g || 0) || byAisle(a, b));
     let h = '', last = '';
+    if (need.length && got.length) {   // the trolley track fills up as things get ticked
+      const all2 = need.length + got.length, pc = Math.round((got.length / all2) * 100);
+      h += `<button type="button" class="track" id="bTrack" aria-label="In the trolley: ${got.length} of ${all2}. Show the trolley"><span class="tl"><b>In the trolley: ${got.length} of ${all2}</b><small>see them ↓</small></span>` +
+        `<span class="rail" aria-hidden="true"><i style="width:${pc}%"></i><svg style="left:calc(${pc}% - 22px)" width="40" height="34" viewBox="0 0 40 34"><path d="M2 4h6l4 18h20l4-13H10" fill="#ffd23f" stroke="#2b1b3d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><circle cx="14" cy="28" r="3.5" fill="#fff" stroke="#2b1b3d" stroke-width="2.5"/><circle cx="29" cy="28" r="3.5" fill="#fff" stroke="#2b1b3d" stroke-width="2.5"/></svg></span></button>`;
+    }
     need.forEach((x) => {
       if (x.a !== last) { last = x.a; h += `<h2 class="sec" style="background:${AISLE[x.a].col}">${esc(AISLE[x.a].name)}</h2>`; }
       h += rowHtml(x);
     });
     if (!need.length && !got.length) h += '<p class="empty">Type something below, or tap <b>Usuals</b> to restock.</p>';
-    if (got.length) {
+    if (!need.length && got.length) {   // all got: the big moment
       const sure = ui.sure.clear && ui.sure.clear > Date.now();
-      h += `<div class="trolhead"><h2 class="sec">In the trolley · ${got.length}</h2><span class="gap"></span><button type="button" class="btn small${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button></div>`;
-      got.forEach((x) => { h += rowHtml(x); });
-    }
+      h += `<div class="allgot"><span class="conf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>${CART_SVG}<h2>All got!</h2>` +
+        `<div class="tally">${tally(got).map(([n, c]) => `<span>${face(n)}${esc(n)} got ${c}</span>`).join('')}</div>` +
+        `<button type="button" class="btn green big${sure ? ' sure' : ''}" id="bClear">${sure ? 'Sure? Clear ' + got.length : 'Clear trolley'}</button>` +
+        `<button type="button" class="link" id="bShowTrol" aria-expanded="${!!ui.showTrol}">${ui.showTrol ? 'Hide what’s in it' : 'Show what’s in it'}</button></div>`;
+      if (ui.showTrol) h += basketHtml(got, false);
+    } else if (got.length) h += basketHtml(got, true);
     const box = $('#items'), y = window.scrollY;
     if (box.innerHTML !== h) { box.innerHTML = h; window.scrollTo(0, y); }
     // what the Shrimp says
@@ -687,11 +994,12 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     else if (!need.length && got.length) mood = 'done';
     else if (!need.length) mood = 'empty';
     else if (got.length) mood = 'shop';
-    const fresh = need.filter(isNew).length;
-    if (mood === 'some' && fresh) mood = 'news';
+    const freshL = need.filter(isNew), fresh = freshL.length, whos = Array.from(new Set(freshL.map((x) => x.b || '')));
+    const who = whos.length === 1 && whos[0] ? whos[0] : '';
+    if (mood === 'some' && fresh) mood = who ? 'newsby' : 'news';
     if (mood !== ui.mood || !ui.line) { ui.mood = mood; ui.line = pick(LINES[mood]); }
-    $('#say').textContent = fill(ui.line, { n: need.length, got: got.length, left: need.length, new: fresh });
-    renderTip();
+    $('#say').textContent = fill(ui.line, { n: need.length, got: got.length, left: need.length, new: fresh, who });
+    renderWho(); renderTip();
   }
 
   /* --- one-time tip: put Shrimply on the home screen --- */
@@ -703,7 +1011,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   const shareIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-label="Share" role="img" style="vertical-align:-2px"><path d="M12 15V3M7.5 7.5L12 3l4.5 4.5"/><path d="M6 11H5v10h14V11h-1"/></svg>';
   function renderTip() {
     const t = $('#tip');
-    const want = !!sync.code && !seen.tip && !standalone() && (isIOS || isAndroid);
+    // not on the first open: wait for a second visit, or three things added on this phone, and a name first
+    const settled = (+seen.opens || 0) >= 2 || seen.mine.length >= 3;
+    const want = !!sync.code && !seen.tip && !!myName() && settled && !standalone() && (isIOS || isAndroid);
     const kind = !want ? '' : bip ? 'bip' : isIOS ? 'ios' : 'android';
     if (t.dataset.kind === kind) return;
     t.dataset.kind = kind;
@@ -716,6 +1026,13 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       <p>${how} Then Shrimply opens like an app, even with no signal in the shop.</p>
       ${kind === 'bip' ? '<div class="acts2"><button type="button" class="btn sky small" id="tipGo">Install Shrimply</button></div>' : ''}`;
   }
+  /* --- one-time card: what should the house call you? --- */
+  function renderWho() { $('#who').classList.toggle('hide', !sync.code || !!myName()); }
+  $('#who').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (setName($('#whoI').value)) { $('#whoI').blur(); toast(`Hi ${esc(myName())}! The house will see your name on what you add.`); render(); }
+    else $('#whoI').focus();
+  });
   function tipDone() { seen.tip = 1; saveSeen(); renderTip(); }
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); bip = e; renderTip(); });
   window.addEventListener('appinstalled', tipDone);
@@ -758,6 +1075,87 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     $('#uSay').textContent = ui.uline;
   }
 
+  /* --- kits: lists you buy together. A recipe is just a kit with its ingredients in. --- */
+  const KCOL = ['#7ed957', '#ffc93c', '#c79bff', '#6ec1ff', '#ff8fa3', '#5ee0b8', '#ffb38a'];
+  function renderKits(tree) {
+    const ks = kitsOf(tree);
+    let h = '';
+    ks.forEach((k, i) => {
+      const prev = k.list.slice(0, 4).map((x) => x.n).join(', ') + (k.list.length > 4 ? '…' : '');
+      h += `<div class="kit"><button type="button" class="kb" data-kitedit="${esc(k.id)}" aria-label="Edit ${esc(k.n)}, ${k.list.length} things"><span class="badge" style="background:${KCOL[i % KCOL.length]}" aria-hidden="true">${k.list.length}</span><span style="min-width:0"><span class="kn">${esc(k.n)}</span><span class="ks">${esc(prev || 'Empty: tap to fill it')}</span></span></button>` +
+        (k.list.length ? `<button type="button" class="btn sun small" data-kitadd="${esc(k.id)}" aria-label="Add ${esc(k.n)} to the list">Add</button>` : '<span></span>') + '</div>';
+    });
+    if (!ks.length) h = '<p class="empty">No kits yet. Tap <b>+ New kit</b>.</p>';
+    const box = $('#klist'); if (box.innerHTML !== h) box.innerHTML = h;
+    if (!ui.kline || (!ks.length) !== ui.kempty) { ui.kempty = !ks.length; ui.kline = pick(ks.length ? LINES.kits : LINES.nokits); }
+    $('#kSay').textContent = ui.kline;
+  }
+  const curKit = () => { const { r, arg } = route(); return r === 'kit' ? kitsOf(view()).find((x) => x.id === arg) : null; };
+  function renderKit(k) {
+    if (document.activeElement !== $('#keN') && $('#keN').value !== k.n) $('#keN').value = k.n;
+    $('#keT').textContent = k.n || 'Edit kit';
+    let h = '';
+    k.list.forEach((i) => {
+      h += `<div class="krow"><span class="nm2">${esc(i.n)}</span><em>${esc(i.q || '')}</em><button type="button" class="rmx" data-kitrm="${esc(i.k)}" aria-label="Take ${esc(i.n)} out of the kit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>`;
+    });
+    if (!k.list.length) h = '<p class="note" style="font-size:14px">Nothing in this kit yet. Add things above, one at a time or a whole recipe at once.</p>';
+    const box = $('#keList'); if (box.innerHTML !== h) box.innerHTML = h;
+    $('#keFill').classList.toggle('hide', !itemsOf(view()).length);
+    $('#keSv').textContent = k.s ? String(k.s) : '–';
+    $('#keSm').disabled = !k.s; $('#keSp').disabled = k.s >= 20;
+  }
+  function setServes(d) {    // – (not a recipe) → 2 → 3 … 20; going below 1 makes it a plain kit again
+    saveKitName();
+    const k = curKit(); if (!k) return;
+    const s = k.s ? k.s + d : (d > 0 ? 2 : 0);
+    write(W.kitPut(k.id, Object.assign({}, k, { s: s >= 1 ? Math.min(20, s) : 0 })));
+  }
+  function saveKitName() {
+    clearTimeout(ui.keT);
+    const k = curKit(); if (!k) return;
+    const n = $('#keN').value.replace(/\s+/g, ' ').trim().slice(0, 40);
+    if (n && n !== k.n) write(W.kitPut(k.id, Object.assign({}, k, { n })));
+  }
+  function kitAddText(raw) {
+    const k = curKit(); if (!k) return;
+    const lines = splitLines(raw).map(parseLine).filter((x) => x.n);
+    if (!lines.length) return;
+    const tree = view(), have = new Set(k.list.map((i) => keyOf(i.n)));
+    const fresh = lines.filter((x) => { const key = keyOf(x.n); if (have.has(key)) return false; have.add(key); return true; }).map((x) => ({ n: x.n, q: x.q, a: aisleFor(tree, x.n) }));
+    if (!fresh.length) { toast('That’s already in the kit.'); return; }
+    write(W.kitPut(k.id, Object.assign({}, k, { list: k.list.concat(fresh) })));
+    if (fresh.length > 1) toast(`Added ${fresh.length} things to ${esc(k.n)}.`);
+  }
+  function leaveKit() {
+    saveKitName();
+    const k = curKit();
+    if (k && !k.list.length && ui.kitFresh === k.id && k.n === 'New kit') write(W.kitDel(k.id));   // a kit made and left empty: tidy it away
+    ui.kitFresh = '';
+    if (ui.pushed) back(); else go('kits', true);
+  }
+  function home() { closeSheet(); if (ui.pushed) { const n = ui.pushed; ui.pushed = 0; history.go(-n); } else go('', true); }
+  function kitQ(q) {   // an amount as it'll go on the list: scaled when the Add sheet's "Serves" has been changed
+    const g = $('#kGo'), base = g ? +g.dataset.base : 0, now = g ? +g.dataset.serves : 0;
+    return base && now && now !== base ? scaleQty(q, now / base) : String(q || '');
+  }
+  function openKitAdd(k, tree) {
+    const kind = 'kitadd:' + k.id;
+    if (sheetFor === kind) return;
+    const onList = new Set(itemsOf(tree).filter((x) => x.s === 'need').map((x) => keyOf(x.n)));
+    let rows = '', n = 0;
+    const serve = k.s ? `<div class="serve"><span><b>Serves <span id="kSv">${k.s}</span></b><small id="kSn">As written</small></span><span class="step"><button type="button" class="iconbtn" data-serve="-1" aria-label="Fewer people"${k.s <= 1 ? ' disabled' : ''}>−</button><button type="button" class="iconbtn" data-serve="1" aria-label="More people"${k.s >= 20 ? ' disabled' : ''}>+</button></span></div>` : '';
+    k.list.forEach((i) => {
+      if (onList.has(keyOf(i.n))) { rows += `<div class="pick off"><span class="tick" aria-hidden="true"><b></b></span><span class="nm2">${esc(i.n)}</span><em>on the list</em></div>`; return; }
+      n++;
+      rows += `<div class="pick"><button type="button" class="tick on" data-pick="${esc(i.k)}" data-q="${esc(i.q || '')}" aria-pressed="true" aria-label="Buy ${esc(i.n)}"><b>${tickSvg.replace('width="18" height="18"', 'width="16" height="16"')}</b></button><span class="nm2">${esc(i.n)}</span><em>${esc(i.q || '')}</em></div>`;
+    });
+    openSheet(kind, `<div class="grab" aria-hidden="true"></div><div class="ph"><h2>${esc(k.n)}</h2>${closeX}</div>
+      <p class="note" style="font-size:15px;font-weight:700;margin-top:-6px">Untick anything you’ve still got.</p>
+      ${serve}<div class="picks">${rows}</div>
+      <button type="button" class="btn green big" id="kGo" data-kit="${esc(k.id)}" data-base="${k.s || 0}" data-serves="${k.s || 0}" data-autofocus${n ? '' : ' disabled'}>${n ? `Add ${n} to the list` : 'It’s all on the list already'}</button>
+      <p class="credit">Anything already on the list isn’t doubled up. A Bouncy Production · Made for Haz</p>`, 'Add ' + k.n);
+  }
+
   /* --- sheets: edit an item, share the list --- */
   let sheetFor = '';
   function openSheet(kind, html, label) {
@@ -775,6 +1173,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       <div><label class="lb" for="eN">What</label><input id="eN" class="field" maxlength="60" value="${esc(it.n)}" autocomplete="off"></div>
       <div><label class="lb" for="eQ">How many, or a note</label><input id="eQ" class="field" maxlength="40" value="${esc(it.q || '')}" placeholder="e.g. 4 pints, the barista one" autocomplete="off"></div>
       <div><span class="lb" id="eAl">Aisle</span><div class="achips" role="group" aria-labelledby="eAl" data-sel="${it.a}">${chips}</div><p class="note" style="margin-top:8px">The Shrimp remembers this, so ${esc(it.n.toLowerCase())} lands here next time too.</p></div>
+      ${it.b ? `<p class="note" style="font-size:14px;font-weight:800">Added by ${esc(it.b)}</p>` : ''}
       <div class="two"><button type="button" class="btn rm" id="eRm">Remove</button><button type="button" class="btn green big" id="eSave" data-id="${esc(it.id)}">Save</button></div>
       <p class="credit">A Bouncy Production · Made for Haz</p>`, 'Edit ' + it.n);
   }
@@ -793,6 +1192,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       <button type="button" class="btn small" id="bCopy" style="align-self:center" data-label="Copy the link instead">Copy the link instead</button>`
       : '<button type="button" class="btn coral" id="bCopy" style="align-self:center" data-autofocus data-label="Copy invite link">Copy invite link</button>'}
       <p class="linkout hide" id="linkOut"></p>
+      <div><label class="lb" for="whoE">Your name on this phone</label><input id="whoE" class="field" maxlength="16" value="${esc(myName())}" placeholder="So the house knows who added what" autocomplete="given-name"></div>
       <div class="warnbox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b1b3d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Anyone with this code can see and change the list. No passwords, so only share it with the house.</span></div>
       ${sync.tx && sync.tx.demo ? '<p class="note" style="text-align:center">Demo mode: the code only works in other tabs of this browser until a Firebase address goes in sync-config.js.</p>' : ''}
       <button type="button" class="link" id="bLeave">Leave this list on this phone</button>
@@ -800,29 +1200,32 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   }
 
   /* --- toast --- */
-  function toast(html, act) {        // act = {label, fn}: one button on the toast
+  function toast(html, act, alt) {   // act = {label, fn}: the main button. alt = a second choice (the toast stays up longer)
     const t = $('#toast');
-    $('#toastT').innerHTML = html; ui.toastAct = act || null;
+    $('#toastT').innerHTML = html; ui.toastAct = act || null; ui.toastAlt = alt || null;
     $('#toastB').textContent = act ? act.label : '';
     $('#toastB').classList.toggle('hide', !act);
+    $('#toastB2').textContent = alt ? alt.label : '';
+    $('#toastB2').classList.toggle('hide', !alt);
+    t.classList.toggle('duo', !!alt);
     t.classList.remove('hide');
-    clearTimeout(ui.toastT); ui.toastT = setTimeout(() => t.classList.add('hide'), 5000);
+    clearTimeout(ui.toastT); ui.toastT = setTimeout(() => t.classList.add('hide'), alt ? 9000 : 5000);
   }
 
   /* =====================================================================
      ACTIONS
      ===================================================================== */
   function addText(raw) {
-    const r = W.add(view(), raw, Date.now());
+    const r = W.add(view(), raw, Date.now(), myName());
     if (!r) return;
     if (r.dupe) {
-      const q = typeof raw === 'string' ? parseAdd(raw).q : '', id = r.item.id;
-      if (q && q !== (r.item.q || '')) {
-        toast(`${esc(r.item.n)}’s already on the list${r.item.q ? ' (' + esc(r.item.q) + ')' : ''}.`, { label: 'Make it ' + q, fn: () => {
-          const e = W.edit(view(), id, { q });
-          if (e.length) { write(e); toast(`${esc(r.item.n)}: now ${esc(q)}.`); }
-        } });
-      } else toast(`${esc(r.item.n)}’s already on the list.`);
+      const q = typeof raw === 'string' ? parseTyped(raw).q : '', id = r.item.id, nm = esc(r.item.n);
+      const setTo = (v) => () => { const e = W.edit(view(), id, { q: v }); if (e.length) { write(e); toast(`${nm}: now ${esc(v)}.`); } };
+      const sum = q ? sumQty(r.item.q, q) : null;
+      const said = `${nm}’s already on the list${r.item.q ? ' (' + esc(r.item.q) + ')' : ''}.`;
+      if (sum) toast(said, { label: 'Add them up: ' + sum, fn: setTo(sum) }, { label: 'Make it ' + q, fn: setTo(q) });   // 12 eggs + 4 eggs: 16, or just 4
+      else if (q && q !== (r.item.q || '')) toast(said, { label: 'Make it ' + q, fn: setTo(q) });
+      else toast(said);
       const row = $(`.row[data-id="${CSS.escape(r.item.id)}"]`);
       if (row) { row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash'); row.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
       return;
@@ -833,8 +1236,10 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   function tick(id) {
     const x = itemsOf(view()).find((i) => i.id === id);
     if (!x) return;
-    write(W.tick(view(), id, x.s !== 'got', Date.now()));
+    const on = x.s !== 'got';
+    if (on) { ui.lastTick = id; clearTimeout(ui.dropT); ui.dropT = setTimeout(() => { ui.lastTick = ''; }, 900); }   // the new sticker drops into the basket
     const b = $(`[data-tick="${CSS.escape(id)}"]`); if (b) { b.classList.add('pop'); }
+    write(W.tick(view(), id, on, Date.now(), myName()));
     try { navigator.vibrate && navigator.vibrate(12); } catch (e) {}
   }
   function autoClear() {
@@ -879,8 +1284,49 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#jCode').addEventListener('keydown', (e) => { if (e.key === 'Enter') joinList(); });
   $('#jCode').addEventListener('input', (e) => { const v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6); if (v !== e.target.value) e.target.value = v; $('#jErr').textContent = ''; });
   $('#addF').addEventListener('submit', (e) => { e.preventDefault(); const i = $('#addI'); addText(i.value); i.value = ''; i.focus(); });
-  $('#toastB').addEventListener('click', () => { const a = ui.toastAct; ui.toastAct = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
+  $('#toastB').addEventListener('click', () => { const a = ui.toastAct; ui.toastAct = ui.toastAlt = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
+  $('#toastB2').addEventListener('click', () => { const a = ui.toastAlt; ui.toastAct = ui.toastAlt = null; $('#toast').classList.add('hide'); if (a) a.fn(); });
   $('#bShare').addEventListener('click', () => nav('share'));
+  $('#bKits').addEventListener('click', () => { ui.kline = ''; nav('kits'); window.scrollTo(0, 0); });
+  $('#kBack').addEventListener('click', back);
+  $('#kNew').addEventListener('click', () => {
+    const id = newId();
+    write(W.kitPut(id, { n: 'New kit', list: [], t: Date.now() }));
+    ui.kitFresh = id; nav('kit/' + id); window.scrollTo(0, 0);
+    setTimeout(() => { const i = $('#keN'); i.focus(); i.select(); }, 50);
+  });
+  $('#klist').addEventListener('click', (e) => {
+    const a = e.target.closest('[data-kitadd]'); if (a) return nav('kitadd/' + a.getAttribute('data-kitadd'));
+    const ed = e.target.closest('[data-kitedit]'); if (ed) { nav('kit/' + ed.getAttribute('data-kitedit')); window.scrollTo(0, 0); }
+  });
+  $('#keBack').addEventListener('click', leaveKit);
+  $('#keDone').addEventListener('click', leaveKit);
+  $('#keN').addEventListener('input', () => { clearTimeout(ui.keT); ui.keT = setTimeout(saveKitName, 500); });
+  $('#keN').addEventListener('change', saveKitName);
+  $('#keSm').addEventListener('click', () => setServes(-1));
+  $('#keSp').addEventListener('click', () => setServes(1));
+  $('#keN').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); saveKitName(); $('#keI').focus(); } });
+  $('#keF').addEventListener('submit', (e) => { e.preventDefault(); kitAddText($('#keI').value); $('#keI').value = ''; $('#keI').focus(); });
+  $('#keI').addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); kitAddText($('#keI').value); $('#keI').value = ''; } });
+  $('#keI').addEventListener('paste', () => setTimeout(() => { const v = $('#keI').value; if (splitLines(v).length > 1) { kitAddText(v); $('#keI').value = ''; } }, 0));
+  $('#keList').addEventListener('click', (e) => {
+    const x = e.target.closest('[data-kitrm]'); if (!x) return;
+    const k = curKit(); if (!k) return;
+    write(W.kitPut(k.id, Object.assign({}, k, { list: k.list.filter((i) => i.k !== x.getAttribute('data-kitrm')) })));
+  });
+  $('#keFill').addEventListener('click', () => {
+    const k = curKit(); if (!k) return;
+    const have = new Set(k.list.map((i) => keyOf(i.n))), more = itemsOf(view()).sort(byAisle).filter((i) => !have.has(keyOf(i.n)));
+    if (!more.length) { toast('Everything on the list is already in this kit.'); return; }
+    write(W.kitPut(k.id, Object.assign({}, k, { list: k.list.concat(more.map((i) => ({ n: i.n, a: i.a, q: i.q }))) })));
+    toast(`Copied in ${more.length} from the list.`);
+  });
+  $('#keDel').addEventListener('click', (e) => {
+    const b = e.currentTarget, k = curKit(); if (!k) return;
+    if (b.dataset.sure === '1') { b.dataset.sure = ''; b.textContent = 'Delete this kit'; ui.kitFresh = ''; toast(`${esc(k.n)} binned.`); leaveKit(); write(W.kitDel(k.id)); return; }
+    b.dataset.sure = '1'; b.textContent = 'Sure? Tap again to delete';
+    setTimeout(() => { b.dataset.sure = ''; b.textContent = 'Delete this kit'; }, 3000);
+  });
   $('#bUsuals').addEventListener('click', () => { ui.uline = ''; ui.tidy = false; ui.find = ''; $('#uFind').value = ''; nav('usuals'); window.scrollTo(0, 0); });
   $('#uBack').addEventListener('click', back);
   $('#uDone').addEventListener('click', back);
@@ -890,6 +1336,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   $('#items').addEventListener('click', (e) => {
     const t = e.target.closest('[data-tick]'); if (t) return tick(t.getAttribute('data-tick'));
     const ed = e.target.closest('[data-edit]'); if (ed) return nav('edit/' + ed.getAttribute('data-edit'));
+    if (e.target.closest('#bTrack')) { const t = $('#trol'); if (t) t.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+    if (e.target.closest('#bShowTrol')) { ui.showTrol = !ui.showTrol; render(); return; }
     if (e.target.closest('#bClear')) {
       if (ui.sure.clear && ui.sure.clear > Date.now()) { ui.sure.clear = 0; write(W.clear(itemsOf(view()).filter((x) => x.s === 'got'))); toast('Trolley cleared. Nice shop!'); }
       else { ui.sure.clear = Date.now() + 3000; render(); setTimeout(render, 3100); }
@@ -901,7 +1349,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       const k = c.getAttribute('data-usual'), tree = view();
       const on = itemsOf(tree).filter((x) => x.s === 'need' && keyOf(x.n) === k);
       if (on.length) write(W.remove(on[on.length - 1].id));
-      else { const u = usualsOf(tree).find((x) => x.k === k); if (u) { const r = W.add(tree, { n: u.n, a: u.a }, Date.now()); if (r && !r.dupe) { write(r.ops); addedHere(r.item.id); } } }
+      else { const u = usualsOf(tree).find((x) => x.k === k); if (u) { const r = W.add(tree, { n: u.n, a: u.a }, Date.now(), myName()); if (r && !r.dupe) { write(r.ops); addedHere(r.item.id); } } }
       return;
     }
     const f = e.target.closest('[data-forget]'); if (f) return write(W.forget(f.getAttribute('data-forget')));
@@ -939,6 +1387,36 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       try { navigator.clipboard.writeText(link).then(done, fail); } catch (er) { fail(); }
       return;
     }
+    const pk = e.target.closest('[data-pick]');
+    if (pk) {
+      const on = pk.getAttribute('aria-pressed') !== 'true';
+      pk.setAttribute('aria-pressed', String(on)); pk.classList.toggle('on', on);
+      $('b', pk).innerHTML = on ? tickSvg.replace('width="18" height="18"', 'width="16" height="16"') : '';
+      pk.closest('.pick').classList.toggle('off', !on);
+      $('em', pk.closest('.pick')).textContent = on ? kitQ(pk.dataset.q) : 'got some';
+      const n = $$('[data-pick][aria-pressed="true"]', $('#panel')).length, b2 = $('#kGo');
+      b2.textContent = n ? `Add ${n} to the list` : 'Nothing to add'; b2.disabled = !n;
+      return;
+    }
+    const sv = e.target.closest('[data-serve]');
+    if (sv) {
+      const g = $('#kGo'), base = +g.dataset.base, now = Math.max(1, Math.min(20, +g.dataset.serves + +sv.dataset.serve));
+      g.dataset.serves = String(now);
+      $('#kSv').textContent = String(now);
+      $('#kSn').textContent = now === base ? 'As written' : 'Amounts changed from ' + base;
+      $$('[data-pick]', $('#panel')).forEach((b) => { if (b.getAttribute('aria-pressed') === 'true') $('em', b.closest('.pick')).textContent = kitQ(b.dataset.q); });
+      $$('[data-serve]', $('#panel')).forEach((b) => { b.disabled = (+b.dataset.serve < 0 && now <= 1) || (+b.dataset.serve > 0 && now >= 20); });
+      return;
+    }
+    if (e.target.closest('#kGo')) {
+      const id = $('#kGo').getAttribute('data-kit'), k = kitsOf(view()).find((x) => x.id === id); if (!k) return back();
+      const keys = new Set($$('[data-pick][aria-pressed="true"]', $('#panel')).map((b) => b.getAttribute('data-pick')));
+      const r = W.addMany(view(), k.list.filter((i) => keys.has(i.k)).map((i) => Object.assign({}, i, { q: kitQ(i.q) })), Date.now(), myName());
+      write(r.ops);
+      r.ops.forEach((op) => { const m = /^items\/(.+)$/.exec(op.p); if (op.m === 'PUT' && m) addedHere(m[1]); });
+      toast(fill(pick(LINES.kitadded), { n: r.added }) + (r.skipped ? ` ${r.skipped} were already there.` : ''));
+      return home();
+    }
     const lv = e.target.closest('#bLeave');
     if (lv) {
       if (lv.dataset.sure === '1') return leave();
@@ -946,6 +1424,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
       setTimeout(() => { if (lv.isConnected) { lv.dataset.sure = ''; lv.textContent = 'Leave this list on this phone'; } }, 3000);
     }
   });
+  $('#panel').addEventListener('change', (e) => { if (e.target.id === 'whoE') { if (setName(e.target.value)) toast(`You’re ${esc(myName())} on this phone.`); else e.target.value = myName(); render(); } });
+  $('#panel').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.id === 'whoE') { e.preventDefault(); e.target.blur(); } });
   $('#panel').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.matches('#eN,#eQ')) { e.preventDefault(); $('#eSave').click(); } });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sheetFor) back(); });
   $$('[data-wig]').forEach((b) => b.addEventListener('click', () => {
@@ -955,9 +1435,9 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 
   sync.onChange = (why) => { if (why === 'status' || why === 'queue') renderPill(); if (why !== 'status' || route().r !== 'usuals') render(); };
   setInterval(autoClear, 60000);
-  const looked = () => { if (sync.code && seen.code === sync.code) { seen.t = Date.now(); saveSeen(); } };
+  const looked = () => { if (sync.code && seen.code === sync.code) { seen.t = Date.now(); saveSeen(); } ui.hiddenAt = Date.now(); };
   window.addEventListener('pagehide', looked);
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') looked(); if (document.visibilityState === 'visible') { if (seen.code === sync.code && typeof seen.t === 'number') ui.since = seen.t; render(); autoClear(); if (sync.tx) { sync.tx.reopen(); flush(); } } });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') looked(); if (document.visibilityState === 'visible') { if (seen.code === sync.code && typeof seen.t === 'number') { ui.since = seen.t; if (ui.hiddenAt && Date.now() - ui.hiddenAt > 10 * 60000) { seen.opens = (+seen.opens || 0) + 1; saveSeen(); } } render(); autoClear(); if (sync.tx) { sync.tx.reopen(); flush(); } } });
 
   /* --- start up --- */
   (function boot() {
@@ -975,7 +1455,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) navigator.serviceWorker.register('sw.js').catch(() => {});
 
   // for tests
-  window.__shrimply = { sync, view, W, guessAisle, parseAdd, keyOf, itemsOf, usualsOf, staleTrolley, applyOp, AUTO_CLEAR_MS, autoClear, ui, seen, renderTip };
+  window.__shrimply = { sync, view, W, guessAisle, parseAdd, parseLine, parseTyped, parseQty, sumQty, scaleQty, splitLines, kitsOf, withoutBy, keyOf, itemsOf, usualsOf, staleTrolley, applyOp, AUTO_CLEAR_MS, autoClear, ui, seen, renderTip };
 })();
 </script>
 </body>
